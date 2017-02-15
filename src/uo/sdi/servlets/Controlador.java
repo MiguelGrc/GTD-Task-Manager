@@ -139,6 +139,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaAdmin.put("modificarContraseña", new ModificarContraseñaAction());
 		mapaAdmin.put("listarTareasHoy", new ListarTareasHoyAction());
 		mapaAdmin.put("cerrarSesion", new CerrarSesionAction());
+		mapaAdmin.put("listarUsuarios", new ListarUsuariosAction());
 		mapaDeAcciones.put("ADMIN", mapaAdmin);
 	}
 	
@@ -205,7 +206,12 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP= new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarTareasHoy.jsp");
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
-		opcionResultadoYJSP.put("ListarTareasHoy", resultadoYJSP);
+		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
+		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
+		opcionResultadoYJSP.put("listarUsuarios", resultadoYJSP);
+		
 		
 		mapaDeNavegacion.put("ADMIN",opcionResultadoYJSP);
 	}

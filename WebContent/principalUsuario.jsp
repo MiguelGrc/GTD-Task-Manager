@@ -53,6 +53,9 @@
 	</table>
 	<br />
 	<a id="mostrar_lista_tareas_hoy" href="listarTareasHoy">Ver las tareas para hoy</a>
+	<br/>
+	<a id="mostrar_lista_usuarios" href="listarUsuarios">Administrar a los usuarios</a>
+	<br/>
 	<a id="cerrarSesion_link_id" href="cerrarSesion">Cerrar sesión</a>
 
 	<%@ include file="pieDePagina.jsp"%>
