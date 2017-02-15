@@ -21,7 +21,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 	private Map<String, Map<String, Accion>> mapaDeAcciones; // <rol, <opcion, objeto Accion>>
 	private Map<String, Map<String, Map<String, String>>> mapaDeNavegacion; // <rol, <opcion, <resultado, JSP>>>
 
-	//Para asegurarnos que se inicia apropiadamente antes de recibir cualquier peticion.
+	//Para asegurarnos que se inicia apropiadamente antes de recibir any request.
 	public void init() throws ServletException {  
 		crearMapaAcciones();
 		crearMapaDeNavegacion();
