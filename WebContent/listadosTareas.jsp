@@ -13,7 +13,7 @@
 	<li>Categorias
 		<ul>
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
-				<li><a href="mostrarCategoria?id=${entry.id}">${entry.name}</a></li>
+			<li><a href="mostrarCategoria?id=${entry.id}">${entry.name}</a></li>
 		</c:forEach>
 		
 		</ul>

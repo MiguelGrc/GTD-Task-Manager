@@ -147,6 +147,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaAdmin.put("mostrarListados", new ListarCategoriasAction());
 		mapaAdmin.put("listarTareasHoy", new ListarTareasHoyAction());
 		mapaAdmin.put("listarTareasInbox", new ListarTareasInboxAction());
+		
+		mapaAdmin.put("borrarUsuario", new BorrarUsuarioAction());
 		mapaDeAcciones.put("ADMIN", mapaAdmin);
 	}
 	
@@ -240,6 +242,9 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
 		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Quizas deberia devolverle a la principal.
 		opcionResultadoYJSP.put("mostrarListados", resultadoYJSP);
+		resultadoYJSP.put("EXITO", "listarUsuarios.jsp");
+		resultadoYJSP.put("FRACASO", "listarUsuarios.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
+		opcionResultadoYJSP.put("borrarUsuario", resultadoYJSP);
 		
 		
 		mapaDeNavegacion.put("ADMIN",opcionResultadoYJSP);
