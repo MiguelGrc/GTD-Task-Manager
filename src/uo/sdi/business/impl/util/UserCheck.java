@@ -26,8 +26,8 @@ public class UserCheck {
 	}
 
 	public static void minPasswordLength(User user) throws BusinessException {
-		String check = "The password must be at least 6 chars long";
-		BusinessCheck.isTrue( user.getPassword().length() >= 6, check);
+		String check = "The password must be at least 8 chars long";
+		BusinessCheck.isTrue( user.getPassword().length() >= 8, check);
 	}
 
 	public static void notRepeatedLogin(User user) throws BusinessException {
@@ -45,6 +45,20 @@ public class UserCheck {
         		.matcher(email)
         		.matches();
     }
+	
+	public static void isValidPasswordSyntax(User user) throws BusinessException {
+		String check = "Not a valid password";
+		BusinessCheck.isTrue( isValidPassword( user.getPassword()), check);
+	}
+	
+	private static boolean isValidPassword(String password) {	//TODO check (contains letter, contains number)
+		String ePattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]";
+		return Pattern.compile(ePattern)
+				.matcher(password)
+				.matches();
+	}
+	
+	
 
 
 }

@@ -16,9 +16,6 @@ public class CerrarSesionAction implements Accion {
 		
 		session.invalidate();
 		
-		
-		// A completar ...
-		
 		return resultado;
 	}
 	

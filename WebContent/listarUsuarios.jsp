@@ -18,11 +18,11 @@
 			</tr>
 		<c:forEach var="usuario" items="${listaUsuarios}" varStatus="i">
 			<tr id="usuario_${i.index}">
-				<td>${usuario.id}</td>
+				<td><a href="mostrarUsuario?id=${usuario.id}">${usuario.id}</a></td>
 				<td>${usuario.login}</td>
 				<td>${usuario.email} </td>
 				<td>${usuario.isAdmin} </td>
-				<td><a href="cambiarEstadoUsuario?id=${usuario.id}">${usuario.status}</a> </td>
+				<td>${usuario.status} </td>
 			</tr>
 		</c:forEach>
 	</table>
