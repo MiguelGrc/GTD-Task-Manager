@@ -7,6 +7,7 @@
 <title>TaskManager - Página principal del usuario</title>
 </head>
 <body>
+  <%@ include file="cerrarSesion.jsp" %>
 	<i>Iniciaste sesión el <fmt:formatDate
 			pattern="dd-MM-yyyy' a las 'HH:mm"
 			value="${sessionScope.fechaInicioSesion}" /> (usuario número
@@ -51,12 +52,12 @@
 			<td id="status"><jsp:getProperty property="status" name="user" /></td>
 		</tr>
 	</table>
-	<br />
+	<br/>
 	<a id="mostrar_lista_tareas_hoy" href="listarTareasHoy">Ver las tareas para hoy</a>
 	<br/>
 	<a id="mostrar_lista_usuarios" href="listarUsuarios">Administrar a los usuarios</a>
 	<br/>
-	<a id="cerrarSesion_link_id" href="cerrarSesion">Cerrar sesión</a>
+	<a id="mostrar_listados" href="mostrarListados">Ver tareas.</a>
 
 	<%@ include file="pieDePagina.jsp"%>
 </body>

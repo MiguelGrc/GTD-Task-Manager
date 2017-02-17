@@ -13,10 +13,7 @@
 	<li>Categorias
 		<ul>
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
-			<tr>
-				<td><a href="mostrarCategoria?id=${entry.id}">${entry.id}</a></td>
-				<td>${entry.name}</td>
-			</tr>
+			<li><a href="mostrarCategoria?id=${entry.id}">${entry.name}</a></li>
 		</c:forEach>
 		
 		</ul>

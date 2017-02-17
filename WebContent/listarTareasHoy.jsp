@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>TaskManager - Listado de categorías</title>
+<title>TaskManager - Listado de tareas hoy</title>
 </head>
 <body>
 	<table border="1" align="center">
