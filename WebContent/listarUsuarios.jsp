@@ -7,25 +7,31 @@
 <title>TaskManager - Listado de categorías</title>
 </head>
 <body>
-	<table border="1" align="center">
+	
 	<!-- Se muestra toda la información menos la contraseña -->
+	<form action="borrarUsuario" method="post" name="borrarUsuario_form_name">
+		<table border="1" align="center">
 			<tr>
+				<th/>
 				<th>ID</th>
 				<th>Login</th>
 				<th>Email</th>
 				<th>Es Administrador</th>
 				<th>Estatus</th>
 			</tr>
-		<c:forEach var="usuario" items="${listaUsuarios}" varStatus="i">
-			<tr id="usuario_${i.index}">
-				<td><a href="mostrarUsuario?id=${usuario.id}">${usuario.id}</a></td>
-				<td>${usuario.login}</td>
-				<td>${usuario.email} </td>
-				<td>${usuario.isAdmin} </td>
-				<td>${usuario.status} </td>
-			</tr>
-		</c:forEach>
-	</table>
+				<c:forEach var="usuario" items="${listaUsuarios}" varStatus="i">
+					<tr id="usuario_${i.index}">
+						<td><input type="radio" name="usuarioABorrar" value="${usuario.id}"/></td>
+						<td><a href="mostrarUsuario?id=${usuario.id}">${usuario.id}</a></td>
+						<td>${usuario.login}</td>
+						<td>${usuario.email} </td>
+						<td>${usuario.isAdmin} </td>
+						<td>${usuario.status} </td>
+					</tr>
+				</c:forEach>
+		</table>
+		<input type="submit" value="Borrar usuario"/>
+	</form>
 	<%@ include file="pieDePagina.jsp" %>
 </body>
 </html>

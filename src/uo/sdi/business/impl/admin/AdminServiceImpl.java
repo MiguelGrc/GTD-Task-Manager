@@ -31,7 +31,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<User> findAllUsers() throws BusinessException {
-		//Preguntar en clase, se acaba de implementar, y se deberia filtrar por admins.
 		return new CommandExecutor<List<User>>().execute( new Command<List<User>>() {
 			@Override public List<User> execute() throws BusinessException {
 				return Persistence.getUserDao().findAll();
