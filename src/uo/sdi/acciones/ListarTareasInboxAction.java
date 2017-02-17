@@ -13,14 +13,7 @@ import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
 
-/**
- * Devuelve el conjunto de tareas pendientes para hoy tomando el usuario en sesión.
- * Eso significa que el usuario tiene que estar identificado previamente (sin problema ya que
- * si accede a esta acción significa que se ha loggeado correctamente).
- * 
- *
- */
-public class ListarTareasHoyAction implements Accion {
+public class ListarTareasInboxAction implements Accion {
 	
 	@Override
 	public String execute(HttpServletRequest request,
@@ -28,19 +21,20 @@ public class ListarTareasHoyAction implements Accion {
 		
 		String resultado="EXITO";
 		
-		List<Task> listaHoy;
+		List<Task> listaTareasInbox;
 		
 		try {
 			TaskService taskService = Services.getTaskService();
-			HttpSession session = request.getSession();
+			HttpSession session= request.getSession();
 			User user =(User)session.getAttribute("user");
-			listaHoy=taskService.findTodayTasksByUserId(user.getId());
-			request.setAttribute("listaMostrar", listaHoy);
-			Log.debug("Obtenida lista de tareas para hoy con [%d] tareas", 
-					listaHoy.size());
+			
+			listaTareasInbox=taskService.findInboxTasksByUserId((user.getId()));
+			request.setAttribute("listaMostrar", listaTareasInbox);
+			Log.debug("Obtenida lista de tareas inbox con [%d] tareas", 
+					listaTareasInbox.size());
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido obteniendo lista de tareas para hoy: %s",
+			Log.debug("Algo ha ocurrido obteniendo lista de categorías: %s",
 					b.getMessage());
 			resultado="FRACASO";
 		}

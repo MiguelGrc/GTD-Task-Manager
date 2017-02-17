@@ -124,24 +124,29 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		Map<String,Accion> mapaPublico=new HashMap<String,Accion>();
 		mapaPublico.put("validarse", new ValidarseAction());
-		mapaPublico.put("listarCategorias", new ListarCategoriasAction());
 		mapaDeAcciones.put("ANONIMO", mapaPublico);
 		
 		Map<String,Accion> mapaRegistrado=new HashMap<String,Accion>();
 		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());
 		mapaRegistrado.put("modificarContraseña", new ModificarContraseñaAction());
-		mapaRegistrado.put("listarTareasHoy", new ListarTareasHoyAction());
 		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
+		//Listados tareas
+		mapaRegistrado.put("mostrarListados", new ListarCategoriasAction());
+		mapaRegistrado.put("listarTareasHoy", new ListarTareasHoyAction());
+		mapaRegistrado.put("listarTareasInbox", new ListarTareasInboxAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		Map<String,Accion> mapaAdmin=new HashMap<String,Accion>();
 		mapaAdmin.put("modificarDatos", new ModificarDatosAction());
 		mapaAdmin.put("modificarContraseña", new ModificarContraseñaAction());
-		mapaAdmin.put("listarTareasHoy", new ListarTareasHoyAction());
 		mapaAdmin.put("cerrarSesion", new CerrarSesionAction());
 		mapaAdmin.put("listarUsuarios", new ListarUsuariosAction());
 		mapaAdmin.put("listarEstadoUsuario", new ListarUsuariosAction());
 		mapaAdmin.put("cambiarEstadoUsuario", new CambiarEstadoUsuarioAction());
+		//Listados tareas
+		mapaAdmin.put("mostrarListados", new ListarCategoriasAction());
+		mapaAdmin.put("listarTareasHoy", new ListarTareasHoyAction());
+		mapaAdmin.put("listarTareasInbox", new ListarTareasInboxAction());
 		mapaDeAcciones.put("ADMIN", mapaAdmin);
 	}
 	
@@ -157,10 +162,6 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		// Mapa de navegación de anónimo
 		resultadoYJSP.put("FRACASO","/login.jsp");
 		opcionResultadoYJSP.put("validarse", resultadoYJSP);
-		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarCategorias.jsp");
-		resultadoYJSP.put("FRACASO","/login.jsp");
-		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/login.jsp");
 		resultadoYJSP.put("FRACASO", "/login.jsp");
@@ -183,10 +184,19 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("modificarContraseña", resultadoYJSP);
+		//Listados tareas
 		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listarTareasHoy.jsp");
-		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
+		opcionResultadoYJSP.put("listarTareasInbox", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Quizas deberia devolverle a la principal.
+		opcionResultadoYJSP.put("mostrarListados", resultadoYJSP);
 		
 		mapaDeNavegacion.put("USUARIO",opcionResultadoYJSP);
 		
@@ -206,10 +216,6 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("modificarContraseña", resultadoYJSP);
 		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listarTareasHoy.jsp");
-		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
-		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("listarUsuarios", resultadoYJSP);
@@ -217,6 +223,19 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
 		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp"); //Le deja en la misma pagina sin cambiar nada.
 		opcionResultadoYJSP.put("cambiarEstadoUsuario", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		//listados tareas
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
+		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); 
+		opcionResultadoYJSP.put("listarTareasInbox", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Quizas deberia devolverle a la principal.
+		opcionResultadoYJSP.put("mostrarListados", resultadoYJSP);
 		
 		
 		mapaDeNavegacion.put("ADMIN",opcionResultadoYJSP);
