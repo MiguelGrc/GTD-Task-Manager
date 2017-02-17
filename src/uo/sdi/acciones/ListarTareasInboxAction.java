@@ -32,6 +32,10 @@ public class ListarTareasInboxAction implements Accion {
 			request.setAttribute("listaMostrar", listaTareasInbox);
 			Log.debug("Obtenida lista de tareas inbox con [%d] tareas", 
 					listaTareasInbox.size());
+			
+			//Mirar esto un poco guarrada a ver si hay otra solución
+			//Guardarlo en session en su porpio action? Y si se cambia cuadno hace la peticion, deberia actualizarse, no?
+			resultado = new ListarCategoriasAction().execute(request, response);
 		}
 		catch (BusinessException b) {
 			Log.debug("Algo ha ocurrido obteniendo lista de categorías: %s",
