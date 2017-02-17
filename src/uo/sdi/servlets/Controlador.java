@@ -124,6 +124,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		Map<String,Accion> mapaPublico=new HashMap<String,Accion>();
 		mapaPublico.put("validarse", new ValidarseAction());
+		mapaPublico.put("crearCuenta", new CrearCuentaAction());
 		mapaPublico.put("listarCategorias", new ListarCategoriasAction());
 		mapaDeAcciones.put("ANONIMO", mapaPublico);
 		
@@ -140,8 +141,6 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaAdmin.put("listarTareasHoy", new ListarTareasHoyAction());
 		mapaAdmin.put("cerrarSesion", new CerrarSesionAction());
 		mapaAdmin.put("listarUsuarios", new ListarUsuariosAction());
-		mapaAdmin.put("listarEstadoUsuario", new ListarUsuariosAction());
-		mapaAdmin.put("cambiarEstadoUsuario", new CambiarEstadoUsuarioAction());
 		mapaDeAcciones.put("ADMIN", mapaAdmin);
 	}
 	
@@ -165,6 +164,10 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/login.jsp");
 		resultadoYJSP.put("FRACASO", "/login.jsp");
 		opcionResultadoYJSP.put("cerrarSesion", resultadoYJSP);
+		resultadoYJSP=new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/login.jsp");
+		resultadoYJSP.put("FRACASO", "/registro.jsp");
+		opcionResultadoYJSP.put("crearCuenta", resultadoYJSP);
 		
 		mapaDeNavegacion.put("ANONIMO",opcionResultadoYJSP);
 		
@@ -213,10 +216,6 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("listarUsuarios", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
-		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp"); //Le deja en la misma pagina sin cambiar nada.
-		opcionResultadoYJSP.put("cambiarEstadoUsuario", resultadoYJSP);
 		
 		
 		mapaDeNavegacion.put("ADMIN",opcionResultadoYJSP);
