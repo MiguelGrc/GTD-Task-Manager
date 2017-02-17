@@ -23,22 +23,24 @@ public class CambiarEstadoUsuarioAction implements Accion {
 		
 		
 		try {
-			AdminService adminService = Services.getAdminService();
-			
-			
-			User user = (User) adminService.findUserById(Long.parseLong(request.getParameter("id")));
-			
-			if(user.getStatus().equals(UserStatus.ENABLED)){
-				adminService.disableUser(user.getId());
+			if(request.getParameter("usuarioId") == null){
+				request.setAttribute("mensajeParaElUsuario", "Seleccione primero un "
+						+ "usuario para cambiarle el estado");
+				resultado="FRACASO";
 			}
 			else{
-				adminService.enableUser(user.getId());
+				AdminService adminService = Services.getAdminService();
+				User user = (User) adminService.findUserById(Long.parseLong(request.getParameter("usuarioId")));
+				
+				if(user.getStatus().equals(UserStatus.ENABLED)){
+					adminService.disableUser(user.getId());
+				}
+				else{
+					adminService.enableUser(user.getId());
+				}
+				Log.debug("Cambiado estado de usuario [%s] a %s", 
+						user.getId(), user.getStatus());
 			}
-			
-			
-			Log.debug("Cambiado estado de usuario [%s] a %s", 
-					user.getId(), user.getStatus());
-			
 			//Volvemos a cargar la lista actualizada.
 			resultado = new ListarUsuariosAction().execute(request, response);
 		}

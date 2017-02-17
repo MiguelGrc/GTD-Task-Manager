@@ -19,19 +19,28 @@ public class BorrarUsuarioAction implements Accion {
 			HttpServletResponse response) {
 		String resultado="EXITO";
 		
-		Long id  = Long.valueOf(request.getParameter("usuarioABorrar"));		
+		Long id;
 		
-		try {
-			AdminService adminService = Services.getAdminService();
-			
-			adminService.deepDeleteUser(id);
-			
-			Log.debug("Usuario [%s] eliminado del sistema",
-					id);
+		try {		
+			if(request.getParameter("usuarioId") == null){
+				request.setAttribute("mensajeParaElUsuario", "Seleccione primero un "
+						+ "usuario para eliminarlo");
+				resultado="FRACASO";
+			}
+			else{
+				id = Long.valueOf(request.getParameter("usuarioId"));
+				AdminService adminService = Services.getAdminService();
+				adminService.deepDeleteUser(id);
+				
+				Log.debug("Usuario [%s] eliminado del sistema",
+						id);
+			}
+			//Volvemos a cargar la lista actualizada.
+			resultado = new ListarUsuariosAction().execute(request, response);
 		}
 		catch (BusinessException b) {
 			Log.debug("Error intentando eliminar del sistema al usuario: %s",
-					id);
+					request.getParameter("usuarioId"));
 			resultado="FRACASO";
 		}
 		return resultado;

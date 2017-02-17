@@ -20,6 +20,7 @@
       	</tr>
       </table>
    </form>
+   <a id="registro_link_id" href="registro.jsp">Registrarse!</a><br><br>
    <a id="listarCategorias_link_id" href="listarCategorias">Lista de categorias</a>
    <%@ include file="pieDePagina.jsp" %>
 </body>
