@@ -5,24 +5,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.comparators.TodayTaskComparator;
+import uo.sdi.comparators.PlannedTaskComparator;
 import uo.sdi.dto.Task;
-import uo.sdi.dto.User;
 import alb.util.log.Log;
 
-/**
- * Devuelve el conjunto de tareas pendientes para hoy tomando el usuario en sesión.
- * Eso significa que el usuario tiene que estar identificado previamente (sin problema ya que
- * si accede a esta acción significa que se ha loggeado correctamente).
- * 
- *
- */
-public class ListarTareasHoyAction implements Accion {
+public class ListarTareasCategoriaAction implements Accion {
 	
 	@Override
 	public String execute(HttpServletRequest request,
@@ -30,25 +21,27 @@ public class ListarTareasHoyAction implements Accion {
 		
 		String resultado="EXITO";
 		
-		List<Task> listaHoy;
+		List<Task> listaTareasCategoria;
 		
+		Long categoryId= Long.valueOf(request.getParameter("id"));
 		try {
-			TaskService taskService = Services.getTaskService();
-			HttpSession session = request.getSession();
-			User user =(User)session.getAttribute("user");
-			listaHoy=taskService.findTodayTasksByUserId(user.getId());
-			Collections.sort(listaHoy, new TodayTaskComparator());
-			request.setAttribute("listaMostrar", listaHoy);
-			Log.debug("Obtenida lista de tareas para hoy con [%d] tareas", 
-					listaHoy.size());
 			
+			
+			TaskService taskService = Services.getTaskService();
+			listaTareasCategoria=taskService.findTasksByCategoryId(categoryId);
+			request.setAttribute("listaMostrar", listaTareasCategoria);
+			Collections.sort(listaTareasCategoria, new PlannedTaskComparator());
+			
+			Log.debug("Obtenida lista de tareas para categoria con id [%d] conteniendo [%d] tareas",
+					categoryId,listaTareasCategoria.size());
 			//Mirar esto un poco guarrada a ver si hay otra solución
 			//Guardarlo en session en su porpio action? Y si se cambia cuadno hace la peticion, deberia actualizarse, no?
 			resultado = new ListarCategoriasAction().execute(request, response);
 		}
 		catch (BusinessException b) {
-			Log.debug("Algo ha ocurrido obteniendo lista de tareas para hoy: %s",
-					b.getMessage());
+			Log.debug("Algo ha ocurrido obteniendo lista de tareas "
+					+ " correspondiente a la categoria con id [%d] : %s",
+					categoryId,b.getMessage());
 			resultado="FRACASO";
 		}
 		return resultado;
@@ -60,3 +53,4 @@ public class ListarTareasHoyAction implements Accion {
 	}
 	
 }
+

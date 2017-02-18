@@ -1,5 +1,6 @@
 package uo.sdi.acciones;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.comparators.PlannedTaskComparator;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
@@ -29,6 +31,7 @@ public class ListarTareasInboxAction implements Accion {
 			User user =(User)session.getAttribute("user");
 			
 			listaTareasInbox=taskService.findInboxTasksByUserId((user.getId()));
+			Collections.sort(listaTareasInbox, new PlannedTaskComparator());
 			request.setAttribute("listaMostrar", listaTareasInbox);
 			Log.debug("Obtenida lista de tareas inbox con [%d] tareas", 
 					listaTareasInbox.size());

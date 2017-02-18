@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.uniovi.es/sdi" prefix="red"%>
 <%@ include file="comprobarNavegacion.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -13,7 +14,7 @@
 	<li>Categorias
 		<ul>
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
-			<li><a href="mostrarCategoria?id=${entry.id}">${entry.name}</a></li>
+			<li><a href="listarTareasCategoria?id=${entry.id}">${entry.name}</a></li>
 		</c:forEach>
 		
 		</ul>
@@ -41,16 +42,12 @@
 						</c:when>
 						<c:otherwise>
 							<td>${task.finished}</td>
+							
 						</c:otherwise>
 					</c:choose>
-					<c:choose>
-						<c:when test="task.planned==null">
-							<td>     </td>
-						</c:when>
-						<c:otherwise>
-							<td>${task.planned}</td>
-						</c:otherwise>
-					</c:choose>
+					<!-- Este tag prepara color en rojo y prepara celda también -->
+					<red:planeado fecha="${task.planned}"/>
+
 					<td>${task.comments}</td>
 				</tr>
 			</c:forEach>
