@@ -25,15 +25,30 @@ public class CrearTareaAction implements Accion {
 		Task task = new Task();
 		
 		try{
-			task.setTitle(tituloTarea);
-//			task.setPlanned()	//TODO
-			task.setComments(comentarioTarea);
-			User user = (User) session.getAttribute("user");
-			task.setUserId(user.getId());
-			TaskService taskService = Services.getTaskService();
-			taskService.createTask(task);
-			Log.debug("Registrada nueva tarea con título [%s]", 
-					task.getTitle());
+			if(tituloTarea == null){
+				request.setAttribute("mensajeParaElUsuario", "Introduzca un título "
+						+ "para la nueva tarea");
+				resultado="FRACASO";
+			}
+			else{
+				User user = (User) session.getAttribute("user");
+				task.setUserId(user.getId());
+				task.setTitle(tituloTarea);
+//				if(fechaPlaneadaTarea.tieneFormatoCorrecto()){
+//					task.setPlanned(-----)	//TODO: se debería poder especificar aunque no sea
+											//obligatorio la fecha planeada o pasamos ???
+//				}
+				if(comentarioTarea != null){
+					task.setComments(comentarioTarea);
+				}
+				TaskService taskService = Services.getTaskService();
+				taskService.createTask(task);
+				Log.debug("Registrada nueva tarea con título [%s]", 
+						task.getTitle());
+			}
+			//Volvemos a cargar la lista actualizada.
+			//TODO: a qué acción hay que llamar aquí ??????
+			resultado = new ListarTareasHoyAction().execute(request, response);
 		}
 		catch (BusinessException b){
 			Log.debug("Algo ha ocurrido intentando crear tarea [%s]: %s", 

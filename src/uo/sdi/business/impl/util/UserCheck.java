@@ -46,12 +46,12 @@ public class UserCheck {
         		.matches();
     }
 	
-	public static void isValidPasswordSyntax(User user) throws BusinessException {
+	public static void isValidPasswordSyntax(User user) throws BusinessException {	//\Custom
 		String check = "Not a valid password";
 		BusinessCheck.isTrue( isValidPassword( user.getPassword()), check);
 	}
 	
-	private static boolean isValidPassword(String password) {	//TODO check (contains letter, contains number)
+	private static boolean isValidPassword(String password) {	//\Custom
 		String ePattern = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,20})$";
 		return Pattern.compile(ePattern)
 				.matcher(password)

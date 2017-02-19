@@ -5,6 +5,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <head>
 <title>TaskManager - Inicie sesión</title>
+</head>
 <body>
 	<div class="container">
 		<form action="validarse" method="post" name="validarse_form_name">
@@ -25,10 +26,9 @@
 					placeholder="Introduzca su contraseña" align="left">
 			</div>
 			<button type="submit" class="btn btn-success">Enviar</button>
+			<a id="registro_link_id" class="btn btn-link" href="registro.jsp">Registrarse!</a>
 		</form>
 	</div>
-	<br><br>
-	<a id="registro_link_id" href="registro.jsp">Registrarse!</a>
 	<br>
 	<br>
 	<a id="listarCategorias_link_id" href="listarCategorias">Lista de
