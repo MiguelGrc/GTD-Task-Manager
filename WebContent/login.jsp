@@ -24,14 +24,15 @@
 					name="passUsuario" class="form-control" id="pwd"
 					placeholder="Introduzca su contraseña" align="left">
 			</div>
-			<button type="submit" class="btn btn-default">Enviar</button>
+			<button type="submit" class="btn btn-success">Enviar</button>
 		</form>
 	</div>
+	<br><br>
 	<a id="registro_link_id" href="registro.jsp">Registrarse!</a>
 	<br>
 	<br>
 	<a id="listarCategorias_link_id" href="listarCategorias">Lista de
-		categorias</a>
+		categorías</a>
 	<%@ include file="pieDePagina.jsp"%>
 </body>
 </html>

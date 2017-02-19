@@ -52,7 +52,7 @@ public class UserCheck {
 	}
 	
 	private static boolean isValidPassword(String password) {	//TODO check (contains letter, contains number)
-		String ePattern = ".*"/*"^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]"*/;
+		String ePattern = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,20})$";
 		return Pattern.compile(ePattern)
 				.matcher(password)
 				.matches();

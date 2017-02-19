@@ -37,7 +37,7 @@ public class CambiarEstadoUsuarioAction implements Accion {
 				else{
 					adminService.enableUser(user.getId());
 				}
-				Log.debug("Cambiado estado de usuario [%s] a %s", 
+				Log.debug("Cambiado estado de usuario [%d] a %s", 
 						user.getId(), user.getStatus());
 			}
 			//Volvemos a cargar la lista actualizada.

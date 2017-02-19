@@ -25,7 +25,7 @@
 				<h1>Administrar usuarios</h1>
 			</center>
 			<br>
-			<table class="table">
+			<table class="table table-hover">
 				<tr>
 					<th />
 					<th>ID</th>

@@ -20,7 +20,7 @@ public class PlaneadoTag extends SimpleTagSupport {
 		if (fecha != null) {
 			mensaje = "<td><p>" + fecha + "<p></td>";
 			if (fecha.before(DateUtil.today())) {
-				mensaje = "<td><p style=\"color:red;\">" + fecha + "</p></td>";
+				mensaje = "<td class=\"danger\"><p style=\"color:red;\">" + fecha + "</p></td>";
 			}
 		}
 
