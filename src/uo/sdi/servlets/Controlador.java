@@ -140,6 +140,13 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("crearTarea", new CrearTareaAction());
 		mapaRegistrado.put("prepararEdicionTarea", new PrepararEdicionTareaAction());
 		mapaRegistrado.put("editarTarea", new EditarTareaAction());
+		//Categoria opciones
+		mapaRegistrado.put("menuCrearCategoria", new ComprobarCategoriaElegidaAction());
+		mapaRegistrado.put("menuModificarCategoria", new ComprobarCategoriaElegidaAction());
+		mapaRegistrado.put("eliminarCategoria", new BorrarCategoriaAction());
+		//Categoría menu
+		mapaRegistrado.put("crearCategoria", new CrearCategoriaAction());
+		mapaRegistrado.put("modificarCategoria", new ModificarCategoriaAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		Map<String,Accion> mapaAdmin=new HashMap<String,Accion>();
@@ -228,6 +235,24 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
 		resultadoYJSP.put("FRACASO", "/editarTarea.jsp");
 		opcionResultadoYJSP.put("editarTarea", resultadoYJSP);
+		//Categorias opciones
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/modificarCategoria.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
+		opcionResultadoYJSP.put("menuModificarCategoria", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
+		opcionResultadoYJSP.put("eliminarCategoria", resultadoYJSP);
+		//Categorias resultados
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
+		opcionResultadoYJSP.put("crearCategoria", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
+		opcionResultadoYJSP.put("modificarCategoria", resultadoYJSP);
 		
 		mapaDeNavegacion.put("USUARIO",opcionResultadoYJSP);
 		

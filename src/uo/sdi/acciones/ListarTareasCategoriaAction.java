@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import uo.sdi.acciones.tipos.ListType;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
@@ -23,7 +25,20 @@ public class ListarTareasCategoriaAction implements Accion {
 		
 		List<Task> listaTareasCategoria;
 		
-		Long categoryId= Long.valueOf(request.getParameter("id"));
+		HttpSession session = request.getSession();
+		
+		String choosenCategory = request.getParameter("id");
+		
+		Long categoryId;
+		
+		if(choosenCategory==null){ //Si no se seleccionnó y se viene de otra opcion para volver
+			                  //a la lista anterior.
+			categoryId=(Long) session.getAttribute("categoriaSeleccionada");
+		}
+		else{
+			categoryId= Long.valueOf(request.getParameter("id"));
+		}
+		
 		try {
 			
 			
@@ -37,6 +52,9 @@ public class ListarTareasCategoriaAction implements Accion {
 			//Mirar esto un poco guarrada a ver si hay otra solución
 			//Guardarlo en session en su porpio action? Y si se cambia cuadno hace la peticion, deberia actualizarse, no?
 			resultado = new ListarCategoriasAction().execute(request, response);
+		
+			session.setAttribute("ultimaLista", ListType.Categoria);
+			session.setAttribute("categoriaSeleccionada", categoryId);
 		}
 		catch (BusinessException b) {
 			Log.debug("Algo ha ocurrido obteniendo lista de tareas "
