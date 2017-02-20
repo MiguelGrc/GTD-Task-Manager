@@ -53,9 +53,9 @@
 			    Ordenar <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu">
-			    <li><a href="#">Por login</a></li>
-			    <li><a href="#">Por email</a></li>
-			    <li><a href="#">Por status</a></li>
+			    <li><a href="ordenarUsuarios?modo=login">Por login</a></li>
+			    <li><a href="ordenarUsuarios?modo=email">Por email</a></li>
+			    <li><a href="ordenarUsuarios?modo=status">Por status</a></li>
 			  </ul>
 			</div>
 			<button type="submit" class="btn btn-danger"
