@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uo.sdi.acciones.tipos.ListType;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
@@ -39,6 +40,8 @@ public class ListarTareasInboxAction implements Accion {
 			//Mirar esto un poco guarrada a ver si hay otra solución
 			//Guardarlo en session en su porpio action? Y si se cambia cuadno hace la peticion, deberia actualizarse, no?
 			resultado = new ListarCategoriasAction().execute(request, response);
+			
+			session.setAttribute("ultimaLista", ListType.Inbox);
 		}
 		catch (BusinessException b) {
 			Log.debug("Algo ha ocurrido obteniendo lista de categorías: %s",

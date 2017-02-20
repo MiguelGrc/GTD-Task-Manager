@@ -74,6 +74,11 @@
 			onclick="form.action='prepararEdicionTarea'">Editar tarea</button><br><br>
 		<button type="submit" class="btn btn-success">
 			Finalizar tarea</button></div>
+			
+		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a>
+		<button type="submit" class ="btn btn-primary" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
+		<button type="submit" class ="btn btn-primary" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
+		<button type="submit" class = "btn btn-primary" onclick="form.action='eliminarCategoria'">Eliminar categoría</button>
 	</form>
 	</c:if>
 	</div>

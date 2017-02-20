@@ -7,6 +7,7 @@ import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Task;
+import uo.sdi.dto.util.Cloner;
 import alb.util.log.Log;
 
 public class MarcarTareaComoFinalizadaAction implements Accion {
@@ -26,7 +27,6 @@ public class MarcarTareaComoFinalizadaAction implements Accion {
 			else{
 				TaskService taskService = Services.getTaskService();
 				Task task = (Task) taskService.findTaskById(Long.parseLong(request.getParameter("tareaId")));
-				
 				//TODO check before if it's already finished ????
 				taskService.markTaskAsFinished(task.getId());
 				
@@ -35,7 +35,7 @@ public class MarcarTareaComoFinalizadaAction implements Accion {
 			}
 			//Volvemos a cargar la lista actualizada.
 			//TODO OJO que esto depende de la lista en la que estemos!!!!!
-			resultado = new ListarTareasHoyAction().execute(request, response);
+			resultado = new DevolverListaAnteriorAction().execute(request, response);
 		} 
 		catch (BusinessException b) {
 				Log.debug("Error intentando marcar la tarea [%s] como finalizada: %s",

@@ -46,9 +46,8 @@ public class CrearTareaAction implements Accion {
 				Log.debug("Registrada nueva tarea con título [%s]", 
 						task.getTitle());
 			}
-			//Volvemos a cargar la lista actualizada.
-			//TODO: a qué acción hay que llamar aquí ??????
-			resultado = new ListarTareasHoyAction().execute(request, response);
+			//Volvemos a cargar la lista actualizada que escogimos anteriormente.
+			resultado = new DevolverListaAnteriorAction().execute(request, response);
 		}
 		catch (BusinessException b){
 			Log.debug("Algo ha ocurrido intentando crear tarea [%s]: %s", 
