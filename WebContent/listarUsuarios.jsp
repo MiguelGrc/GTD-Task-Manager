@@ -3,9 +3,11 @@
 <%@ include file="comprobarNavegacion.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	function confirmComplete() {
 		var answer = confirm("¿Estás seguro de que deseas eliminar a este usuario?"
@@ -46,11 +48,23 @@
 					</tr>
 				</c:forEach>
 			</table>
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    Ordenar <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu">
+			    <li><a href="#">Por login</a></li>
+			    <li><a href="#">Por email</a></li>
+			    <li><a href="#">Por status</a></li>
+			  </ul>
+			</div>
 			<button type="submit" class="btn btn-danger"
 				onclick="{return confirmComplete();}">Borrar usuario</button>
-			<button type="submit" class="btn btn-primary"
+			<button type="submit" class="btn btn-warning"
 				onclick="form.action='cambiarEstadoUsuario';">Cambiar
 				estado</button>
+				
+			
 			<a href="hola" class="btn btn-primary">CLICA</a>
 		</form>
 	</div>

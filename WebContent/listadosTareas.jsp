@@ -34,6 +34,7 @@
 	<form action="marcarFinalizada" method="post"
 			name="marcarFinalizada_form_name">
 		<table class="table table-bordered table-hover">
+		
 				<tr>
 					<th />
 					<th>Title</th>
@@ -42,10 +43,12 @@
 					<th>Planned</th>
 					<th>Comments</th>
 				</tr>
+				
 			<c:forEach var="task" items="${listaMostrar}" varStatus="i">
 				<tr id="task_${task.id}">
-					<td><input type="radio" name="tareaId"
-						 value="${task.id}" /></td>
+					<td><label class="btn btn-primary">
+						<input type="radio" name="tareaId"
+						 value="${task.id}" /></label>
 					<td>${task.title}</td>
 					<td>${task.created}</td>
 					<c:choose>
@@ -63,6 +66,7 @@
 					<td>${task.comments}</td>
 				</tr>
 			</c:forEach>
+				
 		</table>
 		<div style="float:left; bottom: 10px; left: 10px; position: fixed;">
 		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a><br><br>
