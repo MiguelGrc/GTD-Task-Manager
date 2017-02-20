@@ -11,59 +11,74 @@
 <body>
 	<div class="container">
 		<%@ include file="cerrarSesion.jsp"%>
-		<i>Iniciaste sesión el <fmt:formatDate
+		<center>
+			<h1>Página personal</h1>
+		</center>
+		<hr><br>
+		<center><i>Iniciaste sesión el <fmt:formatDate
 				pattern="dd-MM-yyyy' a las 'HH:mm"
 				value="${sessionScope.fechaInicioSesion}" /> (usuario número
 			${contador})
-		</i> <br /> <br />
+		</i></center> <br /> <br />
 		<jsp:useBean id="user" class="uo.sdi.dto.User" scope="session" />
-		<table>
+		<table align="center">
 			<tr>
-				<td>Id:</td>
-				<td id="id"><jsp:getProperty property="id" name="user" /></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
 				<td id="email"><form action="modificarEmail" method="POST">
-						<input type="text" name="email" size="15"
-							value="<jsp:getProperty property="email" name="user"/>">
-						<input type="submit" value="Modificar">
-					</form></td>
+				<div class="form-group">
+					<label for="email">Email</label> 
+					<div class="form-inline">
+					<input type="text"
+						name="email" class="form-control" id="email"
+						value="<jsp:getProperty property="email" name="user"/>" size="20">
+						<input type="submit" class="form-group-btn btn btn-success" value="Modificar">
+					</div>
+				</div></form></td>
 			</tr>
 			<tr>
-				<td>Contraseña:</td>
-				<td id="contraseña"><form action="modificarContrasena"
-						method="POST">
-						<input type="text" name="passAntigua" size="15" placeholder="Contraseña actual">
-						<input type="text" name="passOne" size="15" placeholder="Nueva contraseña">
-						<input type="text" name="passTwo" size="15" placeholder="Confirmación de la nueva contraseña">
-					    <input type="submit" value="Modificar">
-					</form></td>
+				<td id="pass"><form action="modificarContrasena" method="POST">
+					<div class="form-group">
+					<label for="passAntigua">Contraseña</label>
+				
+					<input type="password" class="form-control" name="passAntigua" 
+						size="20" id="pass" placeholder="Contraseña actual"></div>
+					<div class="form-group">
+					<input type="password" class="form-control" name="passOne" 
+						size="20" placeholder="Nueva contraseña"></div>
+					<div class="form-inline">
+					<input type="password" class="form-control" name="passTwo" 
+						size="20" placeholder="Repita nueva contraseña">
+				    <input type="submit" class="form-group-btn btn btn-success"
+				    	value="Modificar"></div>
+				</form><hr></td>
 			</tr>
 			<tr>
-				<td>Es administrador:</td>
-				<td id="isAdmin"><jsp:getProperty property="isAdmin"
-						name="user" /></td>
+				<td><label>Id:</label>
+				<jsp:getProperty property="id" name="user" /></td>
 			</tr>
 			<tr>
-				<td>Login:</td>
-				<td id="login"><jsp:getProperty property="login" name="user" /></td>
+				<td><label>Es administrador:</label>
+				<jsp:getProperty property="isAdmin" name="user" /></td>
 			</tr>
 			<tr>
-				<td>Estado:</td>
-				<td id="status"><jsp:getProperty property="status" name="user" /></td>
+				<td><label>Login:</label>
+				<jsp:getProperty property="login" name="user" /></td>
 			</tr>
+			<tr>
+				<td><label>Estado:</label>
+				<jsp:getProperty property="status" name="user" /></td>
+			</tr>
+			
 		</table>
-	</div>
-	<br />
+	<hr />
 	<c:if test="${user.isAdmin}">
-	<a id="mostrar_lista_usuarios" href="listarUsuarios">Administrar a
-		los usuarios</a>
-	<br />
+	<a id="mostrar_lista_usuarios" href="listarUsuarios" class="btn btn-warning">
+		Administrar a los usuarios</a>
 	</c:if>
 	<c:if test="${not user.isAdmin}">
-	<a id="mostrar_listados" href="mostrarListados">Ver tareas.</a>
+	<center><a id="mostrar_listados" href="mostrarListados" class="btn btn-primary">
+		Ver tareas</a></center>
 	</c:if>
 	<%@ include file="pieDePagina.jsp"%>
+</div>
 </body>
 </html>

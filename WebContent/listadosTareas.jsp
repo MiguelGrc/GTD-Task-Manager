@@ -46,7 +46,7 @@
 				
 			<c:forEach var="task" items="${listaMostrar}" varStatus="i">
 				<tr id="task_${task.id}">
-					<td><label class="btn btn-primary">
+					<td><label class="btn btn-default">
 						<input type="radio" name="tareaId"
 						 value="${task.id}" /></label>
 					<td>${task.title}</td>
@@ -73,7 +73,8 @@
 		<button type="submit" class="btn btn-warning"
 			onclick="form.action='prepararEdicionTarea'">Editar tarea</button><br><br>
 		<button type="submit" class="btn btn-success">
-			Finalizar tarea</button></div>
+			Finalizar tarea</button><br><br>
+		<a href="#" class="btn btn-default">Mostrar finalizadas</a></div>
 			
 		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a>
 		<button type="submit" class ="btn btn-primary" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
