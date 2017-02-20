@@ -11,6 +11,7 @@ import uo.sdi.acciones.tipos.ListType;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.comparators.PlannedReverseTaskComparator;
 import uo.sdi.comparators.PlannedTaskComparator;
 import uo.sdi.dto.Task;
 import alb.util.log.Log;
@@ -46,6 +47,12 @@ public class ListarTareasCategoriaAction implements Accion {
 			listaTareasCategoria=taskService.findTasksByCategoryId(categoryId);
 			request.setAttribute("listaMostrar", listaTareasCategoria);
 			Collections.sort(listaTareasCategoria, new PlannedTaskComparator());
+			
+			if((boolean) session.getAttribute("mostrarFinalizadas")){
+				List<Task> tareasFinalizadas = taskService.findFinishedTasksByCategoryId(categoryId);
+				Collections.sort(tareasFinalizadas, new PlannedReverseTaskComparator());
+				listaTareasCategoria.addAll(tareasFinalizadas);
+			}
 			
 			Log.debug("Obtenida lista de tareas para categoria con id [%d] conteniendo [%d] tareas",
 					categoryId,listaTareasCategoria.size());

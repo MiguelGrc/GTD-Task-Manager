@@ -61,7 +61,7 @@ public class EditarTareaAction implements Accion {
 				
 			//Volvemos a cargar la lista actualizada.
 			//TODO OJO que esto depende de la lista en la que estemos!!!!!
-			resultado = new ListarTareasHoyAction().execute(request, response);
+			resultado = new DevolverListaAnteriorAction().execute(request, response);
 		} 
 		catch (BusinessException b) {
 				Log.debug("Error intentando editar la tarea [%s]: %s",

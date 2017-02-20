@@ -11,6 +11,7 @@ import uo.sdi.acciones.tipos.ListType;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.comparators.PlannedReverseTaskComparator;
 import uo.sdi.comparators.PlannedTaskComparator;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
@@ -36,6 +37,12 @@ public class ListarTareasInboxAction implements Accion {
 			request.setAttribute("listaMostrar", listaTareasInbox);
 			Log.debug("Obtenida lista de tareas inbox con [%d] tareas", 
 					listaTareasInbox.size());
+			
+			if((boolean) session.getAttribute("mostrarFinalizadas")){
+				List<Task> tareasFinalizadas = taskService.findFinishedInboxTasksByUserId(user.getId());
+				Collections.sort(tareasFinalizadas, new PlannedReverseTaskComparator());
+				listaTareasInbox.addAll(tareasFinalizadas);
+			}
 			
 			//Mirar esto un poco guarrada a ver si hay otra solución
 			//Guardarlo en session en su porpio action? Y si se cambia cuadno hace la peticion, deberia actualizarse, no?

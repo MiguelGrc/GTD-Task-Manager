@@ -147,6 +147,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		//Categoría menu
 		mapaRegistrado.put("crearCategoria", new CrearCategoriaAction());
 		mapaRegistrado.put("modificarCategoria", new ModificarCategoriaAction());
+		//Mostrar finalizadas
+		mapaRegistrado.put("cambiarFinalizadas", new CambiarFiltroTareasFinalizadasAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		Map<String,Accion> mapaAdmin=new HashMap<String,Accion>();
@@ -255,6 +257,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
 		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("modificarCategoria", resultadoYJSP);
+		//Mostrar finalizadas
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
+		opcionResultadoYJSP.put("cambiarFinalizadas", resultadoYJSP);
 		
 		mapaDeNavegacion.put("USUARIO",opcionResultadoYJSP);
 		

@@ -24,6 +24,12 @@ public class ListarCategoriasAction implements Accion {
 		
 		User user= (User) request.getSession().getAttribute("user");
 		
+		//We need to initialize this attribute in the session if it is not initialized.
+		if(request.getSession().getAttribute("mostrarFinalizadas")==null){
+			
+			request.getSession().setAttribute("mostrarFinalizadas", false);
+		}
+		
 		try {
 			TaskService taskService = Services.getTaskService();
 			listaCategorias=taskService.findCategoriesByUserId(user.getId());

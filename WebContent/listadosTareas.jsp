@@ -74,8 +74,16 @@
 			onclick="form.action='prepararEdicionTarea'">Editar tarea</button><br><br>
 		<button type="submit" class="btn btn-success">
 			Finalizar tarea</button><br><br>
-		<a href="#" class="btn btn-default">Mostrar finalizadas</a></div>
-			
+		
+		<a href="cambiarFinalizadas" class="btn btn-default">
+		
+		<c:if test="${mostrarFinalizadas}">
+		No mostrar finalizadas
+		</c:if>
+		<c:if test="${not mostrarFinalizadas}">
+		 Mostrar finalizadas
+		</c:if>
+		</a></div>
 		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a>
 		<button type="submit" class ="btn btn-primary" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
 		<button type="submit" class ="btn btn-primary" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>

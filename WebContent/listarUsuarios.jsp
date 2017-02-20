@@ -65,7 +65,7 @@
 				estado</button>
 				
 			
-			<a href="hola" class="btn btn-primary">CLICA</a>
+			<a href="principalUsuario.jsp" class="btn btn-primary">CLICA</a>
 		</form>
 	</div>
 	<%@ include file="pieDePagina.jsp"%>
