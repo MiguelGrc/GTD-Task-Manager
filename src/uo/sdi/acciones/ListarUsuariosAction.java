@@ -21,15 +21,15 @@ public class ListarUsuariosAction implements Accion {
 		
 		String resultado="EXITO";
 		
-		List<User> listaeUsuarios;
+		List<User> listaUsuarios;
 		
 		try {
 			AdminService adminService = Services.getAdminService();
-			listaeUsuarios=adminService.findAllUsers();
+			listaUsuarios=adminService.findAllUsers();
 			
 			List<User> listaUsuariosNoAdministradores = new ArrayList();
 			
-			for(User user: listaeUsuarios){
+			for(User user: listaUsuarios){
 				if(!(user.getIsAdmin())){
 					listaUsuariosNoAdministradores.add(user);
 				}
@@ -40,7 +40,7 @@ public class ListarUsuariosAction implements Accion {
 			
 			
 			Log.debug("Lista de usuarios obtenida con una cantidad de [%s] usuarios (no administradores)", 
-					listaeUsuarios.size());
+					listaUsuarios.size());
 		}
 		catch (BusinessException b) {
 			Log.debug("Error intentando adquirir lista de Usuarios: %s",

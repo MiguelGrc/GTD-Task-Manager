@@ -25,10 +25,7 @@
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 			<li><a href="listarTareasCategoria?id=${entry.id}">${entry.name}</a></li>
 		</c:forEach>
-		
 		</ul>
-	
-	</li>
 	</ul>
 	</div>
 	
@@ -67,11 +64,12 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<button type="submit" class="btn btn-success">
-			Marcar como finalizada</button>
+		<div style="float:left; bottom: 10px; left: 10px; position: fixed;">
+		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a><br><br>
 		<button type="submit" class="btn btn-warning"
-			onclick="form.action='editarTarea'">Editar tarea</button>
-		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a>
+			onclick="form.action='prepararEdicionTarea'">Editar tarea</button><br><br>
+		<button type="submit" class="btn btn-success">
+			Finalizar tarea</button></div>
 	</form>
 	</c:if>
 	</div>
