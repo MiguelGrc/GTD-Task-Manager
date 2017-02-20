@@ -28,10 +28,11 @@ public class ModificarContraseñaAction implements Accion {
 		User userClone=Cloner.clone(user);
 		userClone.setPassword(primeraPass);
 		try {
+			
 			if(!(primeraPass.equals(segundaPass)) || !(contraseñaAntigua.equals(user.getPassword()))){
 				request.setAttribute("mensajeParaElUsuario", "Contraseña actual mal introducida o"
 						+ " las contraseñas nuevas no coinciden.");
-				resultado="FRACASO"; //Mejor cancelar manualmente.
+				resultado="FRACASO";
 				return resultado;
 			}
 			UserService userService = Services.getUserService();
@@ -41,8 +42,11 @@ public class ModificarContraseñaAction implements Accion {
 			session.setAttribute("user",userClone);
 		}
 		catch (BusinessException b) {
+			
 			Log.debug("Algo ha ocurrido actualizando la contraseña de [%s] a [%s]: %s", 
-					user.getPassword(),b.getMessage());
+					user.getPassword(),primeraPass,b.getMessage());
+			
+			request.setAttribute("mensajeParaElUsuario", b.getMessage());
 			resultado="FRACASO";
 		}
 		return resultado;

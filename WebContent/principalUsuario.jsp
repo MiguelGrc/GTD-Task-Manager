@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td>Email:</td>
-				<td id="email"><form action="modificarDatos" method="POST">
+				<td id="email"><form action="modificarEmail" method="POST">
 						<input type="text" name="email" size="15"
 							value="<jsp:getProperty property="email" name="user"/>">
 						<input type="submit" value="Modificar">
@@ -32,12 +32,12 @@
 			</tr>
 			<tr>
 				<td>Contraseña:</td>
-				<td id="contraseña"><form action="modificarContraseña"
+				<td id="contraseña"><form action="modificarContrasena"
 						method="POST">
-						<input type="text" name="passAntigua" size="15"> <input
-							type="text" name="passOne" size="15"> <input type="text"
-							name="passTwo" size="15"> <input type="submit"
-							value="Modificar">
+						<input type="text" name="passAntigua" size="15" placeholder="Contraseña actual">
+						<input type="text" name="passOne" size="15" placeholder="Nueva contraseña">
+						<input type="text" name="passTwo" size="15" placeholder="Confirmación de la nueva contraseña">
+					    <input type="submit" value="Modificar">
 					</form></td>
 			</tr>
 			<tr>
@@ -56,14 +56,14 @@
 		</table>
 	</div>
 	<br />
-	<a id="mostrar_lista_tareas_hoy" href="listarTareasHoy">Ver las
-		tareas para hoy</a>
-	<br />
+	<c:if test="${user.isAdmin}">
 	<a id="mostrar_lista_usuarios" href="listarUsuarios">Administrar a
 		los usuarios</a>
 	<br />
+	</c:if>
+	<c:if test="${not user.isAdmin}">
 	<a id="mostrar_listados" href="mostrarListados">Ver tareas.</a>
-
+	</c:if>
 	<%@ include file="pieDePagina.jsp"%>
 </body>
 </html>

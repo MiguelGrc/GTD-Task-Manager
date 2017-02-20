@@ -12,7 +12,7 @@ import uo.sdi.dto.User;
 import uo.sdi.dto.util.Cloner;
 
 
-public class ModificarDatosAction implements Accion {
+public class ModificarEmailAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -26,6 +26,7 @@ public class ModificarDatosAction implements Accion {
 		User userClone=Cloner.clone(user);
 		userClone.setEmail(nuevoEmail);
 		try {
+			
 			UserService userService = Services.getUserService();
 			userService.updateUserDetails(userClone);
 			Log.debug("Modificado email de [%s] con el valor [%s]", 
@@ -35,6 +36,7 @@ public class ModificarDatosAction implements Accion {
 		catch (BusinessException b) {
 			Log.debug("Algo ha ocurrido actualizando el email de [%s] a [%s]: %s", 
 					user.getLogin(),nuevoEmail,b.getMessage());
+			request.setAttribute("mensajeParaElUsuario", b.getMessage());
 			resultado="FRACASO";
 		}
 		return resultado;
