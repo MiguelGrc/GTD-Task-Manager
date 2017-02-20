@@ -156,12 +156,14 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaAdmin.put("listarUsuarios", new ListarUsuariosAction());
 		mapaAdmin.put("cambiarEstadoUsuario", new CambiarEstadoUsuarioAction());
 		//Listados tareas
-		mapaAdmin.put("mostrarListados", new ListarCategoriasAction());
+		mapaAdmin.put("ordenarUsuarios", new ListarCategoriasAction());
 		mapaAdmin.put("listarTareasHoy", new ListarTareasHoyAction());
 		mapaAdmin.put("listarTareasInbox", new ListarTareasInboxAction());
 		mapaAdmin.put("listarTareasCategoria", new ListarTareasCategoriaAction());
 		
 		mapaAdmin.put("borrarUsuario", new BorrarUsuarioAction());
+		mapaAdmin.put("ordenarUsuarios", new EstablecerOrdenUsuariosAction());
+		
 		mapaDeAcciones.put("ADMIN", mapaAdmin);
 	}
 	
@@ -283,6 +285,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
 		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("borrarUsuario", resultadoYJSP);
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
+		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
+		opcionResultadoYJSP.put("ordenarUsuarios", resultadoYJSP);
+		
 		//listados tareas
 //		//Al empezar
 //		resultadoYJSP= new HashMap<String, String>();
