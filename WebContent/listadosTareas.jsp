@@ -82,6 +82,7 @@
 		<button type="submit" class = "btn btn-primary" onclick="form.action='eliminarCategoria'">Eliminar categoría</button>
 	</form>
 	</c:if>
+	<a class="btn btn-primary" href="principalUsuario.jsp">Volver atras</a> 
 	</div>
 	</div>
 	</div>
