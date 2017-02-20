@@ -1,11 +1,16 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+
 	<title>TaskManager - Crear tarea</title>
 <body>
+<div class="container">
 	<form action="crearTarea" method="post" name="crearTarea_form_name">
 
 		<center>
@@ -21,6 +26,7 @@
 							id="titulo" placeholder="Título de la tarea" size="30" />
 					</div></td>
 			</tr>
+			<c:if test="${ultimaLista!='Hoy'}">
 			<tr>
 				<td><div class="form-group">
 						<label for="fecha">Fecha planeada</label> <input type="date"
@@ -28,6 +34,7 @@
 							id="fecha" />
 					</div></td>
 			</tr>
+			</c:if>
 			<tr>
 				<td><div class="form-group">
 						<label for="titulo">Comentario</label>
@@ -42,5 +49,6 @@
 		</table>
 	</form>
 	<%@ include file="pieDePagina.jsp"%>
+</div>
 </body>
 </html>

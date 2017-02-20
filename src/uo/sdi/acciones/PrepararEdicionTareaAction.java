@@ -18,12 +18,13 @@ public class PrepararEdicionTareaAction implements Accion {
 
 		String resultado = "EXITO";
 		HttpSession session = request.getSession();
-		
+		System.out.println(request.getParameter("tareaId"));
 		try{
 			if(request.getParameter("tareaId") == null){
 				request.setAttribute("mensajeParaElUsuario", "Seleccione primero una "
 						+ "tarea para poder editarla");
 				resultado = "FRACASO";
+				
 			}
 			else{
 				TaskService taskService = Services.getTaskService();
@@ -34,9 +35,8 @@ public class PrepararEdicionTareaAction implements Accion {
 				Log.debug("Abriendo página de edición para la tarea [%d]",
 						task.getId());
 			}
-//			//Volvemos a cargar la lista actualizada.
-//			//TODO OJO que esto depende de la lista en la que estemos!!!!!
-//			resultado = new ListarTareasHoyAction().execute(request, response);
+			//Volvemos a cargar la lista actualizada que escogimos anteriormente.
+			new DevolverListaAnteriorAction().execute(request, response);
 		} 
 		catch (BusinessException b) {
 				Log.debug("Error intentando abrir la página de edición para la tarea [%s]: %s",

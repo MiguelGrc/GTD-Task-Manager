@@ -1,14 +1,19 @@
 package uo.sdi.acciones;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uo.sdi.acciones.tipos.ListType;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
+import alb.util.date.DateUtil;
 import alb.util.log.Log;
 
 public class CrearTareaAction implements Accion {
@@ -24,28 +29,36 @@ public class CrearTareaAction implements Accion {
 		String comentarioTarea = request.getParameter("comentarioTarea");
 		Task task = new Task();
 		
+		ListType previousList = (ListType) session.getAttribute("ultimaLista");
+		Long categoryId=(Long) session.getAttribute("categoriaSeleccionada");
+		
 		try{
-			if(tituloTarea == null){
-				request.setAttribute("mensajeParaElUsuario", "Introduzca un título "
-						+ "para la nueva tarea");
-				resultado="FRACASO";
+			if(previousList == ListType.Hoy){
+				String formatted = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+				Date date = DateUtil.fromString(formatted);
+				task.setPlanned(date);
 			}
 			else{
-				User user = (User) session.getAttribute("user");
-				task.setUserId(user.getId());
-				task.setTitle(tituloTarea);
-//				if(fechaPlaneadaTarea.tieneFormatoCorrecto()){
-//					task.setPlanned(-----)	//TODO: se debería poder especificar aunque no sea
-											//obligatorio la fecha planeada o pasamos ???
-//				}
-				if(comentarioTarea != null){
-					task.setComments(comentarioTarea);
+				if(previousList == ListType.Categoria){
+					task.setCategoryId(categoryId);
 				}
-				TaskService taskService = Services.getTaskService();
-				taskService.createTask(task);
-				Log.debug("Registrada nueva tarea con título [%s]", 
-						task.getTitle());
+//				if(!fechaPlaneadaTarea.isEmpty()){
+//					task.setPlanned(-------);
+//				}
 			}
+			
+			User user = (User) session.getAttribute("user");
+			task.setUserId(user.getId());
+			task.setTitle(tituloTarea);
+
+			if(comentarioTarea != null){
+				task.setComments(comentarioTarea);
+			}
+			TaskService taskService = Services.getTaskService();
+			taskService.createTask(task);
+			Log.debug("Registrada nueva tarea con título [%s]", 
+					task.getTitle());
+
 			//Volvemos a cargar la lista actualizada que escogimos anteriormente.
 			resultado = new DevolverListaAnteriorAction().execute(request, response);
 		}

@@ -59,7 +59,7 @@
 			  </ul>
 			</div>
 			<button type="submit" class="btn btn-danger"
-				onclick="{return confirmComplete();}">Borrar usuario</button>
+				onclick="{return confirmComwarning;}">Borrar usuario</button>
 			<button type="submit" class="btn btn-warning"
 				onclick="form.action='cambiarEstadoUsuario';">Cambiar
 				estado</button>

@@ -9,18 +9,20 @@
 <head>
 <title>TaskManager - Listados</title>
 </head>
-<body>
-<div class="container-fluid">
+<body style="padding-bottom: 70px">
+<div class="container">
+	<%@ include file="cerrarSesion.jsp"%>
 	<center>
 		<h1>Listado de tareas</h1>
 	</center>
 	<hr>
-<div class="row">
-<div class="col-sm-2">
+	<div class="row">
+	<div class="col-sm-2">
 	<ul class="nav nav-pills nav-stacked">
+	<li><b>Pseudocategorías:</b><br><br></li>
 	<li><a id="listado_inbox" href="listarTareasInbox">Inbox</a></li>
 	<li><a id="listado_Hoy" href="listarTareasHoy">Hoy</a></li>
-	<li>Categorias
+	<li><hr><b>Categorías de usuario:</b><br><br>
 		<ul class="nav nav-pills nav-stacked">
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 			<li><a href="listarTareasCategoria?id=${entry.id}">${entry.name}</a></li>
@@ -28,9 +30,8 @@
 		</ul>
 	</ul>
 	</div>
-	
 	<div class="col-sm-10">
-	<c:if test="${listaMostrar!=null}">
+	<c:choose><c:when test="${listaMostrar!=null}">
 	<form action="marcarFinalizada" method="post"
 			name="marcarFinalizada_form_name">
 		<table class="table table-bordered table-hover">
@@ -46,7 +47,7 @@
 				
 			<c:forEach var="task" items="${listaMostrar}" varStatus="i">
 				<tr id="task_${task.id}">
-					<td><label class="btn btn-default">
+					<td><label class="btn btn-success">
 						<input type="radio" name="tareaId"
 						 value="${task.id}" /></label>
 					<td>${task.title}</td>
@@ -68,6 +69,7 @@
 			</c:forEach>
 				
 		</table>
+<<<<<<< Updated upstream
 		<div style="float:left; bottom: 10px; left: 10px; position: fixed;">
 		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a><br><br>
 		<button type="submit" class="btn btn-warning"
@@ -88,12 +90,42 @@
 		<button type="submit" class ="btn btn-primary" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
 		<button type="submit" class ="btn btn-primary" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
 		<button type="submit" class = "btn btn-primary" onclick="form.action='eliminarCategoria'">Eliminar categoría</button>
+=======
+		<nav class="navbar navbar-inverse navbar-fixed-bottom">
+			<div class="container"><center>
+				<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
+				<a href="#" class="btn btn-info navbar-btn">Mostrar finalizadas</a>
+				<div class="btn-group">&nbsp | &nbsp</div>
+				<a href="crearTarea.jsp" class="btn btn-success navbar-btn">Crear tarea</a>
+				<button type="submit" class="btn btn-warning"
+					onclick="form.action='prepararEdicionTarea'">Editar tarea</button>
+				<button type="submit" class="btn btn-primary navbar-btn">
+					Finalizar tarea</button>
+				<div class="btn-group">&nbsp | &nbsp</div>
+				<button type="submit" class ="btn btn-success navbar-btn" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
+				<button type="submit" class ="btn btn-warning navbar-btn" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
+				<button type="submit" class = "btn btn-danger navbar-btn" onclick="form.action='eliminarCategoria'">Eliminar categoría</button>
+			</center></div>
+		</nav>
+>>>>>>> Stashed changes
 	</form>
-	</c:if>
-	<a class="btn btn-primary" href="principalUsuario.jsp">Volver atras</a> 
-	</div>
+	</c:when>
+	<c:otherwise>
+		<nav class="navbar navbar-inverse navbar-fixed-bottom">
+			<div class="container"><center>
+				<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
+				<div class="btn-group">&nbsp | &nbsp</div>
+				<button type="submit" class ="btn btn-success navbar-btn" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
+				<button type="submit" class ="btn btn-warning navbar-btn" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
+				<button type="submit" class = "btn btn-danger navbar-btn" onclick="form.action='eliminarCategoria'">Eliminar categoría</button>
+			</center></div>
+		</nav>
+	</c:otherwise>
+	</c:choose>
+	
 	</div>
 	</div>
 	<%@ include file="pieDePagina.jsp" %>
+</div>
 </body>
 </html>

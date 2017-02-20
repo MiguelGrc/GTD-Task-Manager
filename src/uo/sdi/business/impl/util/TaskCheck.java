@@ -34,12 +34,12 @@ public class TaskCheck {
 
 	public static void titleIsNotNull(Task task) throws BusinessException {
 		BusinessCheck.isTrue( task.getTitle() != null, 
-				"The title of the task is cannot be null");
+				"The title of the task cannot be null");
 	}
 
 	public static void titleIsNotEmpty(Task task) throws BusinessException {
 		BusinessCheck.isTrue( ! "".equals( task.getTitle() ), 
-				"The title of the task is cannot be empty");
+				"The title of the task cannot be empty");
 	}
 
 }

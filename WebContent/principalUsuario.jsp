@@ -15,6 +15,7 @@
 			<h1>Página personal</h1>
 		</center>
 		<hr><br>
+		<%@ include file="pieDePagina.jsp"%>
 		<center><i>Iniciaste sesión el <fmt:formatDate
 				pattern="dd-MM-yyyy' a las 'HH:mm"
 				value="${sessionScope.fechaInicioSesion}" /> (usuario número
@@ -71,14 +72,14 @@
 		</table>
 	<hr />
 	<c:if test="${user.isAdmin}">
-	<a id="mostrar_lista_usuarios" href="listarUsuarios" class="btn btn-warning">
-		Administrar a los usuarios</a>
+	<center><a id="mostrar_lista_usuarios" href="listarUsuarios" class="btn btn-warning">
+		Administrar a los usuarios</a></center>
 	</c:if>
 	<c:if test="${not user.isAdmin}">
 	<center><a id="mostrar_listados" href="mostrarListados" class="btn btn-primary">
 		Ver tareas</a></center>
 	</c:if>
-	<%@ include file="pieDePagina.jsp"%>
+	
 </div>
 </body>
 </html>

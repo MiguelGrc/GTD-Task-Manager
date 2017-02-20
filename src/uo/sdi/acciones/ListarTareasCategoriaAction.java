@@ -32,8 +32,8 @@ public class ListarTareasCategoriaAction implements Accion {
 		
 		Long categoryId;
 		
-		if(choosenCategory==null){ //Si no se seleccionnó y se viene de otra opcion para volver
-			                  //a la lista anterior.
+		if(choosenCategory==null){	//Si no se seleccionnó y se viene de otra opcion para volver
+			                  		//a la lista anterior.
 			categoryId=(Long) session.getAttribute("categoriaSeleccionada");
 		}
 		else{

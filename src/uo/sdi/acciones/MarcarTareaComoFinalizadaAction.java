@@ -34,7 +34,6 @@ public class MarcarTareaComoFinalizadaAction implements Accion {
 						task.getId());
 			}
 			//Volvemos a cargar la lista actualizada.
-			//TODO OJO que esto depende de la lista en la que estemos!!!!!
 			resultado = new DevolverListaAnteriorAction().execute(request, response);
 		} 
 		catch (BusinessException b) {
