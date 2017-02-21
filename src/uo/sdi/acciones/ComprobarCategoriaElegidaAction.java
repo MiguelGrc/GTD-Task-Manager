@@ -24,8 +24,8 @@ public class ComprobarCategoriaElegidaAction implements Accion {
 		if (session.getAttribute("categoriaSeleccionada") == null
 				|| session.getAttribute("ultimaLista") != ListType.Categoria) {
 			request.setAttribute("mensajeParaElUsuario",
-					"No se ha seleccionado ninguna cateogría "
-							+ "para actuar sobre esta.");
+					"No se ha seleccionado ninguna categoría de usuario "
+							+ "sobre la que actuar");
 			resultado = "FRACASO";
 			//Recargamos las lsitas correspondientes.
 			new DevolverListaAnteriorAction().execute(request, response);

@@ -11,7 +11,7 @@
 <script>
 	function confirmComplete() {
 		var answer = confirm("¿Estás seguro de que deseas eliminar a este usuario?"
-				+ "\n¡La operación será irreversible!\n");
+				+ "\n\n¡La operación será irreversible!\n");
 		var ret = (answer == true) ? true : false;
 		return ret;
 	}
@@ -59,7 +59,7 @@
 			  </ul>
 			</div>
 			<button type="submit" class="btn btn-danger"
-				onclick="{return confirmComwarning;}">Borrar usuario</button>
+				onclick="confirmComplete();">Borrar usuario</button>
 			<button type="submit" class="btn btn-warning"
 				onclick="form.action='cambiarEstadoUsuario';">Cambiar
 				estado</button>

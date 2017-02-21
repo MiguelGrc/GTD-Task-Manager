@@ -13,12 +13,13 @@
 		</center>
 		<hr>
 		<br>
+		<%@ include file="pieDePagina.jsp"%>
 		<table align="center">
 			<tr>
 				<td><div class="form-group">
 						<label for="titulo">Nombre <span style="color: red">*</span></label>
 						<input type="text" name="nombreCategoria" class="form-control"
-							id="titulo" placeholder="Nombre de la tarea" size="30" />
+							id="titulo" placeholder="Nombre de la categoría" size="30" />
 					</div></td>
 			</tr>
 			<tr>
@@ -27,6 +28,6 @@
 			</tr>
 		</table>
 	</form>
-	<%@ include file="pieDePagina.jsp"%>
+
 </body>
 </html>

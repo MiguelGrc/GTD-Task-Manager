@@ -54,8 +54,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			jspSiguiente=buscarJSPEnMapaNavegacionSegun(rolDespues, 
 					accionNavegadorUsuario, resultado);
 
-			//Para comprobarque para legar a cualquier pagina .jsp se pasa antes por el proceso lógico.
-			//Mirar comproarNavegavion.jsp
+			//Para comprobar que para llegar a cualquier pagina .jsp pasa antes por el proceso lógico.
+			//Mirar comprobarNavegacion.jsp
 			request.setAttribute("jspSiguiente", jspSiguiente);
 
 		} catch(PersistenceException e) {

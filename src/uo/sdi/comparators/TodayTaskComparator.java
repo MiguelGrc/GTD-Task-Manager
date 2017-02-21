@@ -30,9 +30,9 @@ public class TodayTaskComparator implements Comparator<Task> {
 			Date secondTaskDate = secondTask.getPlanned();
 		
 			if(firstTaskDate.before(secondTaskDate))
-				return 1;
-			else if(firstTaskDate.after(secondTaskDate))
 				return -1;
+			else if(firstTaskDate.after(secondTaskDate))
+				return 1;
 			else
 				return 0;
 		}

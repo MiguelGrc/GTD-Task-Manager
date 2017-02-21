@@ -20,9 +20,9 @@ public class PlannedTaskComparator implements Comparator<Task> {
 		}
 		
 		if(firstTaskDate.before(secondTaskDate))
-			return 1;
-		else if(firstTaskDate.after(secondTaskDate))
 			return -1;
+		else if(firstTaskDate.after(secondTaskDate))
+			return 1;
 		else
 			return 0;
 	}

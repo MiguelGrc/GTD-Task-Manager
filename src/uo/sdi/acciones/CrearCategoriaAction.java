@@ -27,7 +27,7 @@ public class CrearCategoriaAction implements Accion {
 		
 		
 		try{
-			if(nombreCategoria == null){
+			if(nombreCategoria.isEmpty()){
 				request.setAttribute("mensajeParaElUsuario", "Introduzca un nombre "
 						+ "para la nueva categoria");
 				resultado="FRACASO";

@@ -4,12 +4,12 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <head>
-	<title>TaskManager - Modificar categoria</title>
+	<title>TaskManager - Modificar categoría</title>
 <body>
 	<form action="modificarCategoria" method="post" name="crearCategoria_form_name">
 
 		<center>
-			<h1>Modificar Categoria</h1>
+			<h1>Modificar Categoría</h1>
 		</center>
 		<hr>
 		<br>
@@ -18,7 +18,7 @@
 				<td><div class="form-group">
 						<label for="titulo">Nombre <span style="color: red">*</span></label>
 						<input type="text" name="nombreCategoria" class="form-control"
-							id="titulo" placeholder="Nombre de la tarea" size="30" />
+							id="titulo" placeholder="Nombre de la categoría" size="30" />
 					</div></td>
 			</tr>
 			<tr>

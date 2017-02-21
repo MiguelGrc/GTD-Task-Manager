@@ -33,10 +33,7 @@ public class BorrarCategoriaAction implements Accion {
 
 				Log.debug("Eliminada categoría con id [%d] ", categoryId);
 
-				// Volvemos a cargar la lista actualizada que escogimos
-				// anteriormente.
-				resultado = new DevolverListaAnteriorAction().execute(request,
-						response);
+				resultado = new ListarCategoriasAction().execute(request, response);
 			}
 
 			catch (BusinessException b) {

@@ -7,6 +7,13 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <head>
+<script>
+	function confirmComplete() {
+		return confirm("¿Estás seguro de que deseas eliminar esta categoría?"
+				+ "\n\nSe borrarán todas sus tareas."
+				+ "\n\n¡La operación será irreversible!\n");
+	}
+</script>
 <title>TaskManager - Listados</title>
 </head>
 <body style="padding-bottom: 70px">
@@ -16,6 +23,7 @@
 		<h1>Listado de tareas</h1>
 	</center>
 	<hr>
+	<%@ include file="pieDePagina.jsp" %>
 	<div class="row">
 	<div class="col-sm-2">
 	<ul class="nav nav-pills nav-stacked">
@@ -32,8 +40,8 @@
 	</div>
 	<div class="col-sm-10">
 	<c:choose><c:when test="${listaMostrar!=null}">
-	<form action="marcarFinalizada" method="post"
-			name="marcarFinalizada_form_name">
+	<form action="eliminarCategoria" method="post"
+			name="eliminarCategoria_form_name">
 		<table class="table table-bordered table-hover">
 		
 				<tr>
@@ -47,7 +55,7 @@
 				
 			<c:forEach var="task" items="${listaMostrar}" varStatus="i">
 				<tr id="task_${task.id}">
-					<td><label class="btn btn-success">
+					<td><label class="btn btn-default">
 						<input type="radio" name="tareaId"
 						 value="${task.id}" /></label>
 					<td>${task.title}</td>
@@ -69,63 +77,49 @@
 			</c:forEach>
 				
 		</table>
-<<<<<<< Updated upstream
-		<div style="float:left; bottom: 10px; left: 10px; position: fixed;">
-		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a><br><br>
-		<button type="submit" class="btn btn-warning"
-			onclick="form.action='prepararEdicionTarea'">Editar tarea</button><br><br>
-		<button type="submit" class="btn btn-success">
-			Finalizar tarea</button><br><br>
-		
-		<a href="cambiarFinalizadas" class="btn btn-default">
-		
-		<c:if test="${mostrarFinalizadas}">
-		No mostrar finalizadas
-		</c:if>
-		<c:if test="${not mostrarFinalizadas}">
-		 Mostrar finalizadas
-		</c:if>
-		</a></div>
-		<a href="crearTarea.jsp" class="btn btn-primary">Crear tarea</a>
-		<button type="submit" class ="btn btn-primary" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
-		<button type="submit" class ="btn btn-primary" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
-		<button type="submit" class = "btn btn-primary" onclick="form.action='eliminarCategoria'">Eliminar categoría</button>
-=======
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container"><center>
 				<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
-				<a href="#" class="btn btn-info navbar-btn">Mostrar finalizadas</a>
+				<c:if test="${ultimaLista!='Hoy'}">
+				<a href="cambiarFinalizadas" class="btn btn-info navbar-btn">
+					<c:if test="${mostrarFinalizadas}">
+						No mostrar finalizadas
+					</c:if>
+					<c:if test="${not mostrarFinalizadas}">
+						Mostrar finalizadas
+					</c:if>
+				</a>
+				</c:if>
 				<div class="btn-group">&nbsp | &nbsp</div>
-				<a href="crearTarea.jsp" class="btn btn-success navbar-btn">Crear tarea</a>
+				<a href="crearTarea.jsp" class="btn btn-success navbar-btn">Crear tareaaaaaa</a>
 				<button type="submit" class="btn btn-warning"
 					onclick="form.action='prepararEdicionTarea'">Editar tarea</button>
-				<button type="submit" class="btn btn-primary navbar-btn">
-					Finalizar tarea</button>
+				<button type="submit" class="btn btn-primary navbar-btn"
+					onclick="form.action='marcarFinalizada'">Finalizar tarea</button>
 				<div class="btn-group">&nbsp | &nbsp</div>
 				<button type="submit" class ="btn btn-success navbar-btn" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
 				<button type="submit" class ="btn btn-warning navbar-btn" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
-				<button type="submit" class = "btn btn-danger navbar-btn" onclick="form.action='eliminarCategoria'">Eliminar categoría</button>
+				<button type="submit" class = "btn btn-danger navbar-btn" onclick="confirmComplete();">Eliminar categoría</button>
 			</center></div>
 		</nav>
->>>>>>> Stashed changes
 	</form>
 	</c:when>
 	<c:otherwise>
-		<nav class="navbar navbar-inverse navbar-fixed-bottom">
-			<div class="container"><center>
-				<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
-				<div class="btn-group">&nbsp | &nbsp</div>
-				<button type="submit" class ="btn btn-success navbar-btn" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
-				<button type="submit" class ="btn btn-warning navbar-btn" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
-				<button type="submit" class = "btn btn-danger navbar-btn" onclick="form.action='eliminarCategoria'">Eliminar categoría</button>
-			</center></div>
-		</nav>
+		<form action="crearCategoria.jsp">
+			<nav class="navbar navbar-inverse navbar-fixed-bottom">
+				<div class="container"><center>
+					<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
+					<div class="btn-group">&nbsp | &nbsp</div>
+					<button type="submit" class ="btn btn-success navbar-btn">Crear categoría</button>
+				</center></div>
+			</nav>
+		</form>
 	</c:otherwise>
 	</c:choose>
 	
 	</div>
 	</div>
-	<%@ include file="pieDePagina.jsp" %>
+	
 </div>
 </body>
 </html>

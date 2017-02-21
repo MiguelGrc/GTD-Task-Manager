@@ -27,14 +27,22 @@ public class MarcarTareaComoFinalizadaAction implements Accion {
 			else{
 				TaskService taskService = Services.getTaskService();
 				Task task = (Task) taskService.findTaskById(Long.parseLong(request.getParameter("tareaId")));
-				//TODO check before if it's already finished ????
-				taskService.markTaskAsFinished(task.getId());
 				
-				Log.debug("Marcando tarea [%d] como finalizada", 
-						task.getId());
+				if(task.getFinished() != null){
+					request.setAttribute("mensajeParaElUsuario", "No es posible marcar "
+							+ "como finalizada una tarea ya completada");
+					resultado = "FRACASO";
+				}
+				else{
+					taskService.markTaskAsFinished(task.getId());
+					
+					Log.debug("Marcando tarea [%d] como finalizada", 
+							task.getId());
+				}
 			}
+				
 			//Volvemos a cargar la lista actualizada.
-			resultado = new DevolverListaAnteriorAction().execute(request, response);
+			new DevolverListaAnteriorAction().execute(request, response);
 		} 
 		catch (BusinessException b) {
 				Log.debug("Error intentando marcar la tarea [%s] como finalizada: %s",

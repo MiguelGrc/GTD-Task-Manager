@@ -17,9 +17,14 @@ public class DevolverListaAnteriorAction implements Accion {
 		
 		HttpSession session = request.getSession();
 		
-		ListType previousList= (ListType) session.getAttribute("ultimaLista");
-		
 		String resultado="FRACASO";
+		
+		if(session.getAttribute("ultimaLista") == null){
+			resultado = new ListarCategoriasAction().execute(request, response);
+			return resultado;
+		}
+		
+		ListType previousList= (ListType) session.getAttribute("ultimaLista");
 		
 		switch(previousList){
 			case Categoria:
