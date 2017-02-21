@@ -27,6 +27,7 @@ public class UpdateUserDetailsCommand implements Command<Void> {
 		UserCheck.isValidEmailSyntax( user ); 
 		UserCheck.minLoginLength( user );
 		UserCheck.minPasswordLength( user );
+		UserCheck.isValidPasswordSyntax( user );
 		
 		if (loginIsChanged(previous, user) ) {
 			UserCheck.notRepeatedLogin( user );

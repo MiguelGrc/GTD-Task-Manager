@@ -31,7 +31,7 @@
 					<input type="text"
 						name="email" class="form-control" id="email"
 						value="<jsp:getProperty property="email" name="user"/>" size="20">
-						<input type="submit" class="form-group-btn btn btn-success" value="Modificar">
+						<input id="cambiar_email" type="submit" class="form-group-btn btn btn-success" value="Modificar">
 					</div>
 				</div></form></td>
 			</tr>
@@ -48,7 +48,7 @@
 					<div class="form-inline">
 					<input type="password" class="form-control" name="passTwo" 
 						size="20" placeholder="Repita nueva contraseña">
-				    <input type="submit" class="form-group-btn btn btn-success"
+				    <input id="cambiar_pass" type="submit" class="form-group-btn btn btn-success"
 				    	value="Modificar"></div>
 				</form><hr></td>
 			</tr>

@@ -27,7 +27,7 @@
 				<h1>Administrar usuarios</h1>
 			</center>
 			<br>
-			<table class="table table-hover">
+			<table id="tabla_usuarios" class="table table-hover">
 				<tr>
 					<th />
 					<th>ID</th>
@@ -58,9 +58,9 @@
 			    <li><a href="ordenarUsuarios?modo=status">Por status</a></li>
 			  </ul>
 			</div>
-			<button type="submit" class="btn btn-danger"
+			<button id="borrar_usuario" type="submit" class="btn btn-danger"
 				onclick="confirmComplete();">Borrar usuario</button>
-			<button type="submit" class="btn btn-warning"
+			<button id="cambiar_estado" type="submit" class="btn btn-warning"
 				onclick="form.action='cambiarEstadoUsuario';">Cambiar
 				estado</button>
 				

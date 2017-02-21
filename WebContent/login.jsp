@@ -31,7 +31,7 @@
 				</div></td>
 			</tr>
 			<tr>
-				<td><button type="submit" class="btn btn-success">Enviar</button>
+				<td><button type="submit" name="Enviar" class="btn btn-success">Enviar</button>
 				<a id="registro_link_id" class="btn btn-link" href="registro.jsp">Registrarse!</a></td>
 			</tr>
 		</table>
