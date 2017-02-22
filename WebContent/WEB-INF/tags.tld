@@ -17,4 +17,14 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	<tag>
+		<name>formatdate</name>
+		<tag-class>uo.sdi.tags.DateFormattedTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>fecha</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>

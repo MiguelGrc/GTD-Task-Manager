@@ -229,8 +229,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("marcarFinalizada", resultadoYJSP);
 		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
-		resultadoYJSP.put("FRACASO", "/crearTarea.jsp");
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");								//
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("crearTarea", resultadoYJSP);
 		resultadoYJSP= new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/editarTarea.jsp");

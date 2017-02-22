@@ -30,9 +30,9 @@
 			<c:if test="${ultimaLista!='Hoy'}">
 			<tr>
 				<td><div class="form-group">
-						<label for="fecha">Fecha planeada</label> <input type="date"
-							class="form-control" name="fechaPlaneadaTarea" value="yyyy-mm-dd"
-							id="fecha" />
+						<label for="fecha">Fecha planeada</label> <input type="text"
+							class="form-control" id="fecha" name="fechaPlaneadaTarea"
+							placeholder="dd/mm/yyyy" />
 					</div></td>
 			</tr>
 			</c:if>

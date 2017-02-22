@@ -1,14 +1,24 @@
 package uo.sdi.acciones;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+
+
+
+
 
 import alb.util.log.Log;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
+import uo.sdi.dto.User;
 
 public class PrepararEdicionTareaAction implements Accion {
 
@@ -31,6 +41,10 @@ public class PrepararEdicionTareaAction implements Accion {
 				Task task = (Task) taskService.findTaskById(Long.parseLong(request.getParameter("tareaId")));
 				
 				session.setAttribute("tareaSeleccionada", task);
+				
+				User user = (User) session.getAttribute("user");
+				List<Category> categories = taskService.findCategoriesByUserId(user.getId());
+				session.setAttribute("categorias", categories);
 				
 				Log.debug("Abriendo página de edición para la tarea [%d]",
 						task.getId());

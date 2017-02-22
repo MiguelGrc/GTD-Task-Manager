@@ -7,6 +7,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	function confirmComplete() {
 		return confirm("¿Estás seguro de que deseas eliminar esta categoría?"
@@ -78,31 +80,32 @@
 				
 		</table>
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
-			<div class="container"><center>
-				<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
-				<c:if test="${ultimaLista!='Hoy'}">
-				<a href="cambiarFinalizadas" class="btn btn-info navbar-btn">
-					<c:if test="${mostrarFinalizadas}">
-						No mostrar finalizadas
-					</c:if>
-					<c:if test="${not mostrarFinalizadas}">
-						Mostrar finalizadas
-					</c:if>
-				</a>
+		<div class="container"><center>
+			<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
+			<c:if test="${ultimaLista!='Hoy'}">
+			<a href="cambiarFinalizadas" class="btn btn-info navbar-btn">
+				<c:if test="${mostrarFinalizadas}">
+					No mostrar finalizadas
 				</c:if>
-				<div class="btn-group">&nbsp | &nbsp</div>
-				<a href="crearTarea.jsp" class="btn btn-success navbar-btn">Crear tareaaaaaa</a>
-				<button type="submit" class="btn btn-warning"
-					onclick="form.action='prepararEdicionTarea'">Editar tarea</button>
-				<button type="submit" class="btn btn-primary navbar-btn"
-					onclick="form.action='marcarFinalizada'">Finalizar tarea</button>
-				<div class="btn-group">&nbsp | &nbsp</div>
-				<button type="submit" class ="btn btn-success navbar-btn" onclick="form.action='crearCategoria.jsp'">Crear categoría</button>
-				<button type="submit" class ="btn btn-warning navbar-btn" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
-				<button type="submit" class = "btn btn-danger navbar-btn" onclick="confirmComplete();">Eliminar categoría</button>
-			</center></div>
+				<c:if test="${not mostrarFinalizadas}">
+					Mostrar finalizadas
+				</c:if>
+			</a>
+			</c:if>
+			<div class="btn-group">&nbsp | &nbsp</div>
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#crearTarea">Crear tarea</button>
+			<button type="submit" class="btn btn-warning"
+				onclick="form.action='prepararEdicionTarea'">Editar tarea</button>
+			<button type="submit" class="btn btn-primary navbar-btn"
+				onclick="form.action='marcarFinalizada'">Finalizar tarea</button>
+			<div class="btn-group">&nbsp | &nbsp</div>
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#crearCategoria">Crear categoría</button>
+			<button type="submit" class ="btn btn-warning navbar-btn" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
+			<button type="submit" class = "btn btn-danger navbar-btn" onclick="confirmComplete();">Eliminar categoría</button>
+		</center></div>
 		</nav>
 	</form>
+	
 	</c:when>
 	<c:otherwise>
 		<form action="crearCategoria.jsp">
@@ -110,7 +113,7 @@
 				<div class="container"><center>
 					<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
 					<div class="btn-group">&nbsp | &nbsp</div>
-					<button type="submit" class ="btn btn-success navbar-btn">Crear categoría</button>
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#crearCategoria">Crear categoría</button>
 				</center></div>
 			</nav>
 		</form>
@@ -119,6 +122,65 @@
 	
 	</div>
 	</div>
+	
+	<div class="modal fade" id="crearTarea">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Crear tarea</h3>
+				</div>
+				<form action="crearTarea" method="post" name="crearTarea_form_name">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="titulo">Título <span style="color: red">*</span></label>
+							<input type="text" name="tituloTarea" class="form-control"
+								id="titulo" placeholder="Título de la tarea" />
+						</div>
+						<c:if test="${ultimaLista!='Hoy'}">
+						<div class="form-group">
+							<label for="fecha">Fecha planeada</label> 
+							<input type="text" class="form-control" name="fechaPlaneadaTarea" 
+								id="fecha" placeholder="dd/mm/yyyy" />
+						</div>
+						</c:if>
+						<div class="form-group">
+						<label for="titulo">Comentario</label>
+						<textarea class="form-control" name="comentarioTarea" rows="3"
+							id="titulo" placeholder="Comentarios sobre la tarea"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<input type="submit" class="btn btn-success" value="Crear tarea" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="crearCategoria">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Crear Categoría</h3>
+				</div>
+				<form action="crearCategoria" method="post" name="crearCategoria_form_name">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="titulo">Nombre <span style="color: red">*</span></label>
+							<input type="text" name="nombreCategoria" class="form-control"
+								id="titulo" placeholder="Nombre de la categoría" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<input type="submit" class="btn btn-success" value="Crear categoría" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 	
 </div>
 </body>
