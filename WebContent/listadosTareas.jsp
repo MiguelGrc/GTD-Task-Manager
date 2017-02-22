@@ -7,7 +7,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	function confirmComplete() {
@@ -31,7 +31,7 @@
 	<ul class="nav nav-pills nav-stacked">
 	<li><b>Pseudocategorías:</b><br><br></li>
 	<li><a id="listado_inbox" href="listarTareasInbox">Inbox</a></li>
-	<li><a id="listado_Hoy" href="listarTareasHoy">Hoy</a></li>
+	<li><a id="listado_hoy" href="listarTareasHoy">Hoy</a></li>
 	<li><hr><b>Categorías de usuario:</b><br><br>
 		<ul class="nav nav-pills nav-stacked">
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
@@ -44,7 +44,7 @@
 	<c:choose><c:when test="${listaMostrar!=null}">
 	<form action="eliminarCategoria" method="post"
 			name="eliminarCategoria_form_name">
-		<table class="table table-bordered table-hover">
+		<table id="listado_tareas" class="table table-bordered table-hover">
 		
 				<tr>
 					<th />
@@ -83,7 +83,7 @@
 		<div class="container"><center>
 			<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
 			<c:if test="${ultimaLista!='Hoy'}">
-			<a href="cambiarFinalizadas" class="btn btn-info navbar-btn">
+			<a id="mostrar_finalizadas" href="cambiarFinalizadas" class="btn btn-info navbar-btn">
 				<c:if test="${mostrarFinalizadas}">
 					No mostrar finalizadas
 				</c:if>
@@ -93,15 +93,15 @@
 			</a>
 			</c:if>
 			<div class="btn-group">&nbsp | &nbsp</div>
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#crearTarea">Crear tarea</button>
-			<button type="submit" class="btn btn-warning"
+			<button id="crear_tarea" type="button" class="btn btn-success" data-toggle="modal" data-target="#crearTarea">Crear tarea</button>
+			<button id="editar_tarea" type="submit" class="btn btn-warning"
 				onclick="form.action='prepararEdicionTarea'">Editar tarea</button>
-			<button type="submit" class="btn btn-primary navbar-btn"
+			<button id="finalizar_tarea" type="submit" class="btn btn-primary navbar-btn"
 				onclick="form.action='marcarFinalizada'">Finalizar tarea</button>
 			<div class="btn-group">&nbsp | &nbsp</div>
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#crearCategoria">Crear categoría</button>
-			<button type="submit" class ="btn btn-warning navbar-btn" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
-			<button type="submit" class = "btn btn-danger navbar-btn" onclick="confirmComplete();">Eliminar categoría</button>
+			<button id="crear_categoria" type="button" class="btn btn-success" data-toggle="modal" data-target="#crearCategoria">Crear categoría</button>
+			<button id="modificar_categoria" type="submit" class ="btn btn-warning navbar-btn" onclick="form.action='menuModificarCategoria'">Modificar categoría</button>
+			<button id="eliminar_categoria" type="submit" class = "btn btn-danger navbar-btn" onclick="confirmComplete();">Eliminar categoría</button>
 		</center></div>
 		</nav>
 	</form>
@@ -113,7 +113,7 @@
 				<div class="container"><center>
 					<a class="btn btn-default navbar-btn" href="principalUsuario.jsp">Volver atrás</a> 
 					<div class="btn-group">&nbsp | &nbsp</div>
-					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#crearCategoria">Crear categoría</button>
+					<button id="crear_categoria" type="button" class="btn btn-success" data-toggle="modal" data-target="#crearCategoria">Crear categoría</button>
 				</center></div>
 			</nav>
 		</form>
@@ -150,8 +150,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
-						<input type="submit" class="btn btn-success" value="Crear tarea" />
+						<button id="cerrar_categoria" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<input id="crear_tarea2" type="submit" class="btn btn-success" value="Crear tarea" />
 					</div>
 				</form>
 			</div>
@@ -173,8 +173,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
-						<input type="submit" class="btn btn-success" value="Crear categoría" />
+						<button id="cerrar_categoria" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<input id="crear_categoria2" type="submit" class="btn btn-success" value="Crear categoría" />
 					</div>
 				</form>
 			</div>
