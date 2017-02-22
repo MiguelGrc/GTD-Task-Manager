@@ -7,35 +7,36 @@
 <title>TaskManager - Inicie sesión</title>
 </head>
 <body>
-<div class="container">
-	<center>
-		<h1>Inicie sesión</h1>
-	</center>
-	<hr>
-	<br>
-	<%@ include file="pieDePagina.jsp"%>
-	<form action="validarse" method="post" name="validarse_form_name">
-		<table align="center">
-			<tr>
-				<td><div class="form-group">
-				<label for="username">Usuario:</label> <input type="text"
-					name="nombreUsuario" class="form-control" id="username"
-					placeholder="Introduzca su usuario" align="left" size="40">
-				</div></td>
-			</tr>
-			<tr>
-				<td><div class="form-group">
-				<label for="pwd">Contraseña:</label> <input type="password"
-					name="passUsuario" class="form-control" id="pwd"
-					placeholder="Introduzca su contraseña" align="left" size="40">
-				</div></td>
-			</tr>
-			<tr>
-				<td><button type="submit" name="Enviar" class="btn btn-success">Enviar</button>
-				<a id="registro_link_id" class="btn btn-link" href="registro.jsp">Registrarse!</a></td>
-			</tr>
-		</table>
-	</form>
-</div>	
+	<div class="container">
+		<center>
+			<h1>Inicie sesión</h1>
+		</center>
+		<hr>
+		<br>
+		<%@ include file="pieDePagina.jsp"%>
+		<form action="validarse" method="post" name="validarse_form_name">
+			<table align="center">
+				<tr>
+					<td><div class="form-group">
+							<label for="username">Usuario:</label> <input type="text"
+								name="nombreUsuario" class="form-control" id="username"
+								placeholder="Introduzca su usuario" align="left" size="40">
+						</div></td>
+				</tr>
+				<tr>
+					<td><div class="form-group">
+							<label for="pwd">Contraseña:</label> <input type="password"
+								name="passUsuario" class="form-control" id="pwd"
+								placeholder="Introduzca su contraseña" align="left" size="40">
+						</div></td>
+				</tr>
+				<tr>
+					<td><button type="submit" name="Enviar"
+							class="btn btn-success">Enviar</button> <a id="registro_link_id"
+						class="btn btn-link" href="registro.jsp">Registrarse!</a></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>

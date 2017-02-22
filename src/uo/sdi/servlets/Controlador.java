@@ -12,6 +12,29 @@ import javax.servlet.http.HttpSession;
 
 import alb.util.log.Log;
 import uo.sdi.acciones.*;
+import uo.sdi.acciones.admin.BorrarUsuarioAction;
+import uo.sdi.acciones.admin.CambiarEstadoUsuarioAction;
+import uo.sdi.acciones.admin.EstablecerOrdenUsuariosAction;
+import uo.sdi.acciones.admin.ListarUsuariosAction;
+import uo.sdi.acciones.categorias.BorrarCategoriaAction;
+import uo.sdi.acciones.categorias.ComprobarCategoriaElegidaAction;
+import uo.sdi.acciones.categorias.CrearCategoriaAction;
+import uo.sdi.acciones.categorias.DuplicarCategoriaAction;
+import uo.sdi.acciones.categorias.ModificarCategoriaAction;
+import uo.sdi.acciones.listar.CambiarFiltroTareasFinalizadasAction;
+import uo.sdi.acciones.listar.ListarCategoriasAction;
+import uo.sdi.acciones.listar.ListarTareasCategoriaAction;
+import uo.sdi.acciones.listar.ListarTareasHoyAction;
+import uo.sdi.acciones.listar.ListarTareasInboxAction;
+import uo.sdi.acciones.tareas.CrearTareaAction;
+import uo.sdi.acciones.tareas.EditarTareaAction;
+import uo.sdi.acciones.tareas.MarcarTareaComoFinalizadaAction;
+import uo.sdi.acciones.tareas.PrepararEdicionTareaAction;
+import uo.sdi.acciones.usuario.CerrarSesionAction;
+import uo.sdi.acciones.usuario.CrearCuentaAction;
+import uo.sdi.acciones.usuario.ModificarContraseñaAction;
+import uo.sdi.acciones.usuario.ModificarEmailAction;
+import uo.sdi.acciones.usuario.ValidarseAction;
 import uo.sdi.dto.User;
 import uo.sdi.persistence.PersistenceException;
 
@@ -149,6 +172,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("modificarCategoria", new ModificarCategoriaAction());
 		//Mostrar finalizadas
 		mapaRegistrado.put("cambiarFinalizadas", new CambiarFiltroTareasFinalizadasAction());
+		mapaRegistrado.put("duplicarCategoria", new DuplicarCategoriaAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		Map<String,Accion> mapaAdmin=new HashMap<String,Accion>();
@@ -207,62 +231,50 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("modificarContrasena", resultadoYJSP);
-		//Listados tareas
+		//Listados tareas (la navegación para todas es similar)
 		resultadoYJSP= new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
 		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
-		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("listarTareasInbox", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
-		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Quizas deberia devolverle a la principal.
 		opcionResultadoYJSP.put("mostrarListados", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
-		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp"); //Quizas deberia devolverle a la principal.
 		opcionResultadoYJSP.put("listarTareasCategoria", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
-		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("marcarFinalizada", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");								//
-		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("crearTarea", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/editarTarea.jsp");
-		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("prepararEdicionTarea", resultadoYJSP);
+		
 		resultadoYJSP= new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
 		resultadoYJSP.put("FRACASO", "/editarTarea.jsp");
 		opcionResultadoYJSP.put("editarTarea", resultadoYJSP);
 		//Categorias opciones
 		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/modificarCategoria.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("EXITO", "/modificarCategoria.jsp");
 		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("menuModificarCategoria", resultadoYJSP);
 		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
 		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("eliminarCategoria", resultadoYJSP);
 		//Categorias resultados
 		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
 		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("crearCategoria", resultadoYJSP);
 		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
-		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/modificarCategoria.jsp");
 		opcionResultadoYJSP.put("modificarCategoria", resultadoYJSP);
 		//Mostrar finalizadas
 		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listadosTareas.jsp"); //Aqui va a fallar porque habria que recargar las listas.
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
 		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
 		opcionResultadoYJSP.put("cambiarFinalizadas", resultadoYJSP);
+		
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
+		opcionResultadoYJSP.put("duplicarCategoria", resultadoYJSP);
 		
 		mapaDeNavegacion.put("USUARIO",opcionResultadoYJSP);
 		
@@ -273,29 +285,19 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("validarse",resultadoYJSP);
+		
 		resultadoYJSP= new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("modificarEmail", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/principalUsuario.jsp");
-		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("modificarContrasena", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
-		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("listarUsuarios", resultadoYJSP);
+		
 		resultadoYJSP= new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
-		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp"); //Le deja en la misma pagina sin cambiar nada.
+		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp");
 		opcionResultadoYJSP.put("cambiarEstadoUsuario", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
-		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("borrarUsuario", resultadoYJSP);
-		resultadoYJSP= new HashMap<String, String>();
-		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
-		resultadoYJSP.put("FRACASO", "/listarUsuarios.jsp"); //Si falla el cargar los mapas entonces no enseñamos la pagina.
 		opcionResultadoYJSP.put("ordenarUsuarios", resultadoYJSP);
 		
 		mapaDeNavegacion.put("ADMIN",opcionResultadoYJSP);
