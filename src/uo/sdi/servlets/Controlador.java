@@ -241,8 +241,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResultadoYJSP.put("listarTareasCategoria", resultadoYJSP);
 		opcionResultadoYJSP.put("marcarFinalizada", resultadoYJSP);
 		opcionResultadoYJSP.put("crearTarea", resultadoYJSP);
-		opcionResultadoYJSP.put("prepararEdicionTarea", resultadoYJSP);
 		
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/editarTarea.jsp");
+		resultadoYJSP.put("FRACASO", "/listadosTareas.jsp");
+		opcionResultadoYJSP.put("prepararEdicionTarea", resultadoYJSP);
 		resultadoYJSP= new HashMap<String, String>();
 		resultadoYJSP.put("EXITO", "/listadosTareas.jsp");
 		resultadoYJSP.put("FRACASO", "/editarTarea.jsp");
@@ -291,6 +294,10 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("modificarEmail", resultadoYJSP);
 		opcionResultadoYJSP.put("modificarContrasena", resultadoYJSP);
+		
+		resultadoYJSP= new HashMap<String, String>();
+		resultadoYJSP.put("EXITO", "/listarUsuarios.jsp");
+		resultadoYJSP.put("FRACASO", "/principalUsuario.jsp");
 		opcionResultadoYJSP.put("listarUsuarios", resultadoYJSP);
 		
 		resultadoYJSP= new HashMap<String, String>();
